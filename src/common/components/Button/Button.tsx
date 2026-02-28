@@ -1,8 +1,12 @@
-import { Pressable, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useUnistyles } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
 import { styles } from './Button.styles';
 import type { ButtonProps } from './Button.types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function Button({
   title,
@@ -17,8 +21,16 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const { theme } = useUnistyles();
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
 
-  const textColorMap = {
+  styles.useVariants({
+    variant,
+    size,
+    fullWidth,
+    disabled: disabled || loading,
+  });
+
+  const spinnerColorMap = {
     primary: theme.colors.text.inverse,
     secondary: theme.colors.text.primary,
     outline: theme.colors.brand.primary,
@@ -26,30 +38,25 @@ export function Button({
   };
 
   return (
-    <Pressable
-      style={[
-        styles.container,
-        styles[variant],
-        styles[size],
-        fullWidth && styles.fullWidth,
-        disabled && styles.disabled,
-        style as object,
-      ]}
+    <AnimatedPressable
+      style={[styles.container, animatedStyle, style as object]}
       disabled={disabled || loading}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
       accessibilityRole="button"
       accessibilityLabel={title}
       accessibilityState={{ disabled: disabled || loading, busy: loading }}
       {...rest}
     >
       {loading ? (
-        <ActivityIndicator color={textColorMap[variant]} />
+        <ActivityIndicator color={spinnerColorMap[variant]} />
       ) : (
         <>
           {leftIcon}
-          <Text style={[styles[`${variant}Text`], styles[`${size}Text`]]}>{title}</Text>
+          <Text style={styles.label}>{title}</Text>
           {rightIcon}
         </>
       )}
-    </Pressable>
+    </AnimatedPressable>
   );
 }
