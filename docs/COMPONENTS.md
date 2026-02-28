@@ -13,10 +13,12 @@ All components follow this file structure:
 ```
 ComponentName/
 ├── ComponentName.tsx
-├── ComponentName.types.ts   (optional)
-├── ComponentName.styles.ts  (optional)
+├── ComponentName.types.ts
+├── ComponentName.styles.ts
 └── index.ts
 ```
+
+All components use the **unistyles variants API** for declarative variant/size/state styling. Styles are always in a separate `.styles.ts` file with `variants` blocks and `UnistylesVariants` type export. Interactive components (Button, IconButton, Card, Chip, ListItem) include press animations via `useAnimatedPress`.
 
 ---
 
@@ -255,27 +257,27 @@ Container with themed background, padding, and optional press behavior.
 
 **Props**
 
-| Prop        | Type                                    | Default     | Description                        |
-| ----------- | --------------------------------------- | ----------- | ---------------------------------- |
-| `children`  | `ReactNode`                             | required    | Card content                       |
-| `variant`   | `'default' \| 'elevated' \| 'outlined'` | `'default'` | Visual style                       |
-| `pressable` | `boolean`                               | `false`     | Makes the card tappable            |
-| `onPress`   | `() => void`                            | `undefined` | Press handler (requires pressable) |
-| `style`     | `StyleProp<ViewStyle>`                  | `undefined` | Additional styles                  |
-| `...rest`   | `ViewProps`                             | -           | All ViewProps forwarded            |
+| Prop        | Type                                   | Default     | Description                        |
+| ----------- | -------------------------------------- | ----------- | ---------------------------------- |
+| `children`  | `ReactNode`                            | required    | Card content                       |
+| `variant`   | `'filled' \| 'elevated' \| 'outlined'` | `'filled'`  | Visual style                       |
+| `pressable` | `boolean`                              | `false`     | Makes the card tappable            |
+| `onPress`   | `() => void`                           | `undefined` | Press handler (requires pressable) |
+| `style`     | `StyleProp<ViewStyle>`                 | `undefined` | Additional styles                  |
+| `...rest`   | `ViewProps`                            | -           | All ViewProps forwarded            |
 
 **Usage**
 
 ```typescript
 import { Card } from '@/common/components/Card';
 
-// Static content card
+// Static content card (filled is the default)
 <Card variant="elevated">
   <Text variant="h3">{item.title}</Text>
   <Text variant="bodySmall" color={theme.colors.text.secondary}>{item.description}</Text>
 </Card>
 
-// Pressable card
+// Pressable card with press animation
 <Card variant="outlined" pressable onPress={() => router.push(`/items/${item.id}`)}>
   <Text variant="label">{item.name}</Text>
 </Card>
@@ -328,19 +330,20 @@ import { Chip } from '@/common/components/Chip';
 
 **File:** `src/common/components/ListItem/ListItem.tsx`
 
-Row component for list/menu items with title, subtitle, and left/right slots.
+Row component for list/menu items with title, subtitle, left/right slots, press animation, and breakpoint-responsive padding.
 
 **Props**
 
-| Prop       | Type         | Default     | Description                            |
-| ---------- | ------------ | ----------- | -------------------------------------- |
-| `title`    | `string`     | required    | Primary text                           |
-| `subtitle` | `string`     | `undefined` | Secondary text below title             |
-| `left`     | `ReactNode`  | `undefined` | Leading element (icon, avatar)         |
-| `right`    | `ReactNode`  | `undefined` | Trailing element (icon, badge, switch) |
-| `onPress`  | `() => void` | `undefined` | Makes row tappable                     |
-| `divider`  | `boolean`    | `false`     | Shows bottom divider                   |
-| `disabled` | `boolean`    | `false`     | Disabled state                         |
+| Prop       | Type                   | Default     | Description                             |
+| ---------- | ---------------------- | ----------- | --------------------------------------- |
+| `title`    | `string`               | required    | Primary text                            |
+| `subtitle` | `string`               | `undefined` | Secondary text below title              |
+| `left`     | `ReactNode`            | `undefined` | Leading element (icon, avatar)          |
+| `right`    | `ReactNode`            | `undefined` | Trailing element (icon, badge, switch)  |
+| `onPress`  | `() => void`           | `undefined` | Makes row tappable with press animation |
+| `divider`  | `boolean`              | `false`     | Shows bottom divider                    |
+| `disabled` | `boolean`              | `false`     | Disabled state                          |
+| `size`     | `'sm' \| 'md' \| 'lg'` | `'md'`      | Row height and text size                |
 
 **Usage**
 
@@ -422,17 +425,18 @@ const faqItems = [
 
 **File:** `src/common/components/EmptyState/EmptyState.tsx`
 
-Full-area empty state display for lists and search results.
+Full-area empty state display for lists and search results, with three sizes.
 
 **Props**
 
-| Prop          | Type         | Default     | Description            |
-| ------------- | ------------ | ----------- | ---------------------- |
-| `title`       | `string`     | required    | Primary message        |
-| `message`     | `string`     | `undefined` | Supporting description |
-| `icon`        | `ReactNode`  | `undefined` | Illustration or icon   |
-| `actionLabel` | `string`     | `undefined` | CTA button label       |
-| `onAction`    | `() => void` | `undefined` | CTA button handler     |
+| Prop          | Type                   | Default     | Description            |
+| ------------- | ---------------------- | ----------- | ---------------------- |
+| `title`       | `string`               | required    | Primary message        |
+| `message`     | `string`               | `undefined` | Supporting description |
+| `icon`        | `ReactNode`            | `undefined` | Illustration or icon   |
+| `actionLabel` | `string`               | `undefined` | CTA button label       |
+| `onAction`    | `() => void`           | `undefined` | CTA button handler     |
+| `size`        | `'sm' \| 'md' \| 'lg'` | `'md'`      | Spacing and text size  |
 
 **Usage**
 
@@ -455,14 +459,15 @@ import { Icon } from '@/common/components/Icon';
 
 **File:** `src/common/components/ErrorBoundary/ErrorBoundary.tsx`
 
-React class component error boundary. Catches render errors in its subtree.
+React class component error boundary. Catches render errors in its subtree. Styles are extracted to a separate file but applied via style arrays (class components cannot use `useVariants` hook).
 
 **Props**
 
-| Prop       | Type        | Default           | Description        |
-| ---------- | ----------- | ----------------- | ------------------ |
-| `children` | `ReactNode` | required          | Protected subtree  |
-| `fallback` | `ReactNode` | Built-in error UI | Custom fallback UI |
+| Prop       | Type                                           | Default           | Description                |
+| ---------- | ---------------------------------------------- | ----------------- | -------------------------- |
+| `children` | `ReactNode`                                    | required          | Protected subtree          |
+| `fallback` | `ReactNode`                                    | Built-in error UI | Custom fallback UI         |
+| `onError`  | `(error: Error, errorInfo: ErrorInfo) => void` | `undefined`       | Error callback for logging |
 
 **Usage**
 
@@ -596,7 +601,7 @@ Temporary notification bar with auto-dismiss and optional action.
 | `visible`   | `boolean`                           | required    | Controls visibility                       |
 | `message`   | `string`                            | required    | Notification text                         |
 | `onDismiss` | `() => void`                        | required    | Called when dismissed or duration expires |
-| `variant`   | `'default' \| 'success' \| 'error'` | `'default'` | Visual style                              |
+| `variant`   | `'neutral' \| 'success' \| 'error'` | `'neutral'` | Visual style                              |
 | `duration`  | `number`                            | `3000`      | Auto-dismiss delay in ms                  |
 | `action`    | `SnackbarAction`                    | `undefined` | Optional CTA button                       |
 
@@ -625,7 +630,7 @@ const [snackbarVisible, setSnackbarVisible] = useState(false);
 <Snackbar
   visible={showUndo}
   message={t('actions.itemDeleted')}
-  variant="default"
+  variant="neutral"
   duration={5000}
   action={{ label: t('actions.undo'), onPress: handleUndo }}
   onDismiss={() => setShowUndo(false)}
@@ -640,16 +645,18 @@ const [snackbarVisible, setSnackbarVisible] = useState(false);
 
 **File:** `src/common/components/Checkbox/Checkbox.tsx`
 
-Controlled checkbox with optional label.
+Controlled checkbox with optional label, indeterminate state, animated check mark, and three sizes.
 
 **Props**
 
-| Prop       | Type                         | Default     | Description              |
-| ---------- | ---------------------------- | ----------- | ------------------------ |
-| `checked`  | `boolean`                    | required    | Controlled checked state |
-| `onChange` | `(checked: boolean) => void` | required    | Change handler           |
-| `label`    | `string`                     | `undefined` | Adjacent label text      |
-| `disabled` | `boolean`                    | `false`     | Disabled state           |
+| Prop            | Type                         | Default     | Description                         |
+| --------------- | ---------------------------- | ----------- | ----------------------------------- |
+| `checked`       | `boolean`                    | required    | Controlled checked state            |
+| `onChange`      | `(checked: boolean) => void` | required    | Change handler                      |
+| `label`         | `string`                     | `undefined` | Adjacent label text                 |
+| `disabled`      | `boolean`                    | `false`     | Disabled state                      |
+| `indeterminate` | `boolean`                    | `false`     | Shows minus icon instead of check   |
+| `size`          | `'sm' \| 'md' \| 'lg'`       | `'md'`      | Checkbox size (sm:18, md:22, lg:28) |
 
 **Usage**
 
@@ -663,6 +670,17 @@ const [agreed, setAgreed] = useState(false);
   onChange={setAgreed}
   label={t('auth.agreeToTerms')}
 />
+
+// Indeterminate (e.g., parent checkbox with partial selection)
+<Checkbox
+  checked={someChecked}
+  indeterminate={someChecked && !allChecked}
+  onChange={toggleAll}
+  label={t('actions.selectAll')}
+/>
+
+// Small size
+<Checkbox checked={value} onChange={setValue} size="sm" />
 ```
 
 ---
@@ -703,19 +721,20 @@ const { control } = useForm<MyFormData>({ resolver: zodResolver(schema) });
 
 **File:** `src/common/components/Input/Input.tsx`
 
-Themed text input with label, helper text, error state, and icon slots.
+Themed text input with label, helper text, error/focused/disabled state variants, icon slots, and three sizes.
 
 **Props**
 
-| Prop         | Type             | Default     | Description                     |
-| ------------ | ---------------- | ----------- | ------------------------------- |
-| `label`      | `string`         | `undefined` | Label above the input           |
-| `error`      | `string`         | `undefined` | Error message (turns input red) |
-| `helperText` | `string`         | `undefined` | Helper text below input         |
-| `disabled`   | `boolean`        | `false`     | Disabled state                  |
-| `leftIcon`   | `ReactNode`      | `undefined` | Leading icon inside input       |
-| `rightIcon`  | `ReactNode`      | `undefined` | Trailing icon inside input      |
-| `...rest`    | `TextInputProps` | -           | All RN TextInputProps forwarded |
+| Prop         | Type                   | Default     | Description                     |
+| ------------ | ---------------------- | ----------- | ------------------------------- |
+| `label`      | `string`               | `undefined` | Label above the input           |
+| `error`      | `string`               | `undefined` | Error message (turns input red) |
+| `helperText` | `string`               | `undefined` | Helper text below input         |
+| `disabled`   | `boolean`              | `false`     | Disabled state                  |
+| `size`       | `'sm' \| 'md' \| 'lg'` | `'md'`      | Input height and font size      |
+| `leftIcon`   | `ReactNode`            | `undefined` | Leading icon inside input       |
+| `rightIcon`  | `ReactNode`            | `undefined` | Trailing icon inside input      |
+| `...rest`    | `TextInputProps`       | -           | All RN TextInputProps forwarded |
 
 **Usage**
 
@@ -754,7 +773,7 @@ import { Input } from '@/common/components/Input';
 
 **File:** `src/common/components/RadioGroup/RadioGroup.tsx`
 
-Controlled radio button group.
+Controlled radio button group with animated selection dot and three sizes.
 
 **Props**
 
@@ -764,6 +783,7 @@ Controlled radio button group.
 | `onChange`    | `(value: string) => void`    | required     | Selection handler        |
 | `options`     | `RadioOption[]`              | required     | Array of options         |
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction         |
+| `size`        | `'sm' \| 'md' \| 'lg'`       | `'md'`       | Radio button size        |
 
 **RadioOption Shape**
 
@@ -797,7 +817,7 @@ const [plan, setPlan] = useState('free');
 
 **File:** `src/common/components/SearchBar/SearchBar.tsx`
 
-Search input with clear button and loading indicator.
+Search input with clear button, loading indicator, and three sizes.
 
 **Props**
 
@@ -810,6 +830,7 @@ Search input with clear button and loading indicator.
 | `onClear`      | `() => void`             | `undefined`   | Called when X is pressed             |
 | `loading`      | `boolean`                | `false`       | Shows spinner instead of search icon |
 | `autoFocus`    | `boolean`                | `false`       | Focuses on mount                     |
+| `size`         | `'sm' \| 'md' \| 'lg'`   | `'md'`        | Search bar height and font size      |
 
 **Usage**
 
@@ -873,7 +894,7 @@ import { SegmentedControl } from '@/common/components/SegmentedControl';
 
 **File:** `src/common/components/Select/Select.tsx`
 
-Dropdown picker with label, placeholder, and error state.
+Dropdown picker with label, placeholder, error state, and three sizes.
 
 **Props**
 
@@ -886,6 +907,7 @@ Dropdown picker with label, placeholder, and error state.
 | `placeholder` | `string`                  | `undefined` | Placeholder text      |
 | `error`       | `string`                  | `undefined` | Error message         |
 | `disabled`    | `boolean`                 | `false`     | Disabled state        |
+| `size`        | `'sm' \| 'md' \| 'lg'`    | `'md'`      | Picker height         |
 
 **SelectOption Shape**
 
@@ -916,16 +938,17 @@ import { Select } from '@/common/components/Select';
 
 **File:** `src/common/components/Switch/Switch.tsx`
 
-Toggle switch with optional label.
+Toggle switch with optional label and three sizes. Uses native RN Switch with size scaling via transform.
 
 **Props**
 
-| Prop            | Type                       | Default     | Description             |
-| --------------- | -------------------------- | ----------- | ----------------------- |
-| `value`         | `boolean`                  | required    | Controlled on/off state |
-| `onValueChange` | `(value: boolean) => void` | required    | Change handler          |
-| `label`         | `string`                   | `undefined` | Adjacent label text     |
-| `disabled`      | `boolean`                  | `false`     | Disabled state          |
+| Prop            | Type                       | Default     | Description                            |
+| --------------- | -------------------------- | ----------- | -------------------------------------- |
+| `value`         | `boolean`                  | required    | Controlled on/off state                |
+| `onValueChange` | `(value: boolean) => void` | required    | Change handler                         |
+| `label`         | `string`                   | `undefined` | Adjacent label text                    |
+| `disabled`      | `boolean`                  | `false`     | Disabled state                         |
+| `size`          | `'sm' \| 'md' \| 'lg'`     | `'md'`      | Switch size (sm:0.8x, md:1x, lg:1.15x) |
 
 **Usage**
 
@@ -1049,18 +1072,19 @@ export default function ProfileScreen() {
 
 **File:** `src/common/components/Dialog/Dialog.tsx`
 
-Modal dialog with title, message, and action buttons.
+Modal dialog with title, message, action buttons, and three sizes.
 
 **Props**
 
-| Prop        | Type             | Default     | Description                         |
-| ----------- | ---------------- | ----------- | ----------------------------------- |
-| `visible`   | `boolean`        | required    | Controls visibility                 |
-| `onDismiss` | `() => void`     | required    | Called on backdrop press or dismiss |
-| `title`     | `string`         | `undefined` | Dialog title                        |
-| `message`   | `string`         | `undefined` | Dialog body text                    |
-| `actions`   | `DialogAction[]` | `undefined` | Array of action buttons             |
-| `children`  | `ReactNode`      | `undefined` | Custom content (replaces message)   |
+| Prop        | Type                   | Default     | Description                           |
+| ----------- | ---------------------- | ----------- | ------------------------------------- |
+| `visible`   | `boolean`              | required    | Controls visibility                   |
+| `onDismiss` | `() => void`           | required    | Called on backdrop press or dismiss   |
+| `title`     | `string`               | `undefined` | Dialog title                          |
+| `message`   | `string`               | `undefined` | Dialog body text                      |
+| `actions`   | `DialogAction[]`       | `undefined` | Array of action buttons               |
+| `children`  | `ReactNode`            | `undefined` | Custom content (replaces message)     |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'md'`      | Dialog width (sm:320, md:400, lg:520) |
 
 **DialogAction Shape**
 

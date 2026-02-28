@@ -76,4 +76,4 @@ export { Text } from './Text';
 export type { TextProps, TextVariant, TextWeight, TextAlign } from './Text';
 
 // Shared types
-export type { ColorScheme } from './shared.types';
+export type { ColorScheme, ComponentSize } from './shared.types';

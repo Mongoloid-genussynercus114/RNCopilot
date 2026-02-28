@@ -658,46 +658,101 @@ export default function ExploreTab() {
 ```typescript
 // src/common/components/MyComponent/MyComponent.types.ts
 import type { ViewProps } from 'react-native';
+import type { ComponentSize } from '../shared.types';
+import type { MyComponentStyleVariants } from './MyComponent.styles';
 
-export interface MyComponentProps extends ViewProps {
+export interface MyComponentProps extends ViewProps, MyComponentStyleVariants {
   title: string;
   subtitle?: string;
   onPress?: () => void;
+  size?: ComponentSize;
+  disabled?: boolean;
 }
+```
+
+```typescript
+// src/common/components/MyComponent/MyComponent.styles.ts
+import { StyleSheet, type UnistylesVariants } from 'react-native-unistyles';
+
+export const styles = StyleSheet.create((theme) => ({
+  container: {
+    backgroundColor: theme.colors.background.surface,
+    borderRadius: theme.metrics.borderRadius.md,
+    borderWidth: 1,
+    borderColor: theme.colors.border.default,
+    variants: {
+      size: {
+        sm: { padding: theme.metrics.spacing.p8 },
+        md: { padding: theme.metrics.spacing.p12 },
+        lg: { padding: theme.metrics.spacing.p16 },
+      },
+      disabled: {
+        true: { opacity: 0.5 },
+      },
+    },
+  },
+  title: {
+    variants: {
+      size: {
+        sm: { fontSize: theme.fonts.size.sm },
+        md: { fontSize: theme.fonts.size.md },
+        lg: { fontSize: theme.fonts.size.lg },
+      },
+    },
+  },
+}));
+
+export type MyComponentStyleVariants = UnistylesVariants<typeof styles>;
 ```
 
 ```typescript
 // src/common/components/MyComponent/MyComponent.tsx
 import { View, Pressable } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import Animated from 'react-native-reanimated';
 import { Text } from '@/common/components/Text';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
+import { styles } from './MyComponent.styles';
 import type { MyComponentProps } from './MyComponent.types';
 
-export function MyComponent({ title, subtitle, onPress, style, ...rest }: MyComponentProps) {
-  const Container = onPress ? Pressable : View;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+export function MyComponent({
+  title,
+  subtitle,
+  onPress,
+  size = 'md',
+  disabled = false,
+  style,
+  ...rest
+}: MyComponentProps) {
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
+
+  styles.useVariants({ size, disabled });
+
+  if (onPress) {
+    return (
+      <AnimatedPressable
+        style={[styles.container, animatedStyle, style]}
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        disabled={disabled}
+        accessibilityRole="button"
+        {...rest}
+      >
+        <Text variant="h3" style={styles.title}>{title}</Text>
+        {subtitle && <Text variant="bodySmall" color="secondary">{subtitle}</Text>}
+      </AnimatedPressable>
+    );
+  }
 
   return (
-    <Container
-      style={[styles.container, style]}
-      onPress={onPress}
-      accessibilityRole={onPress ? 'button' : undefined}
-      {...rest}
-    >
-      <Text variant="h3">{title}</Text>
-      {subtitle && <Text variant="bodySmall" color={undefined}>{subtitle}</Text>}
-    </Container>
+    <View style={[styles.container, style]} {...rest}>
+      <Text variant="h3" style={styles.title}>{title}</Text>
+      {subtitle && <Text variant="bodySmall" color="secondary">{subtitle}</Text>}
+    </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    padding: theme.metrics.spacing.p16,
-    backgroundColor: theme.colors.background.surface,
-    borderRadius: theme.metrics.borderRadius.md,
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-  },
-}));
 ```
 
 ```typescript
@@ -713,7 +768,6 @@ export type { MyComponentProps } from './MyComponent.types';
 ```typescript
 // app/(main)/my-screen.tsx
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native-unistyles';
 import { ScreenContainer } from '@/common/components/ScreenContainer';
 import { Text } from '@/common/components/Text';
 import { ErrorBoundary } from '@/common/components/ErrorBoundary';
@@ -729,13 +783,6 @@ export default function MyScreen() {
     </ScreenContainer>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flex: 1,
-    gap: theme.metrics.spacingV.p16,
-  },
-}));
 ```
 
 ---

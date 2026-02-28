@@ -239,28 +239,64 @@ src/features/<feature>/
 2. **Never use color literals.** All colors come from `theme.colors.*`.
 3. **Never hardcode numeric spacing.** Use `theme.metrics.spacing.*` or the helper functions.
 
-### StyleSheet Pattern
+### StyleSheet Pattern (with Variants)
+
+All component styles MUST be in a separate `.styles.ts` file. Use the unistyles `variants` API for any style that changes based on props:
 
 ```typescript
-import { StyleSheet } from 'react-native-unistyles';
+// Component.styles.ts
+import { StyleSheet, type UnistylesVariants } from 'react-native-unistyles';
 
-// The callback receives the theme object
-const styles = StyleSheet.create((theme) => ({
+export const styles = StyleSheet.create((theme) => ({
   container: {
-    padding: theme.metrics.spacing.p16,
-    paddingVertical: theme.metrics.spacingV.p24,
-    backgroundColor: theme.colors.background.surface,
-    borderRadius: theme.metrics.borderRadius.md,
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-  },
-  title: {
-    fontSize: theme.fonts.size.lg,
-    color: theme.colors.text.primary,
-    fontWeight: '700',
+    borderRadius: theme.metrics.borderRadius.lg,
+    // Variants define style variations declaratively
+    variants: {
+      variant: {
+        primary: { backgroundColor: theme.colors.brand.primary },
+        secondary: { backgroundColor: theme.colors.background.surfaceAlt },
+        outline: {
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderColor: theme.colors.border.default,
+        },
+      },
+      size: {
+        sm: { padding: theme.metrics.spacing.p8 },
+        md: { padding: theme.metrics.spacing.p12 },
+        lg: { padding: theme.metrics.spacing.p16 },
+      },
+      disabled: {
+        true: { opacity: 0.5 },
+      },
+    },
   },
 }));
+
+export type MyComponentStyleVariants = UnistylesVariants<typeof styles>;
 ```
+
+```typescript
+// Component.tsx - call useVariants once, then use styles directly
+styles.useVariants({ variant, size, disabled });
+return <View style={styles.container} />;
+```
+
+**Key rules:**
+
+- Call `styles.useVariants(...)` once per render, before accessing any style
+- Use `compoundVariants` for styles that depend on multiple variant combinations
+- Use boolean variants (`true`/`false` keys) for toggleable states like `disabled`, `focused`, `error`
+- Use `miniRuntime` (second arg) for safe area insets and screen dimensions:
+  ```typescript
+  const styles = StyleSheet.create((theme, rt) => ({
+    container: { paddingTop: rt.insets.top },
+  }));
+  ```
+- Use breakpoint-responsive values for tablet adaptation:
+  ```typescript
+  padding: { xs: theme.metrics.spacing.p12, md: theme.metrics.spacing.p24 }
+  ```
 
 ### Responsive Helpers
 
