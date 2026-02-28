@@ -11,18 +11,10 @@ export function Text({
   children,
   ...rest
 }: TextProps) {
+  styles.useVariants({ variant, weight, align });
+
   return (
-    <RNText
-      style={[
-        styles.base,
-        styles[variant],
-        weight && styles[weight],
-        align && styles[align],
-        color ? { color } : undefined,
-        style,
-      ]}
-      {...rest}
-    >
+    <RNText style={[styles.text, color ? { color } : undefined, style]} {...rest}>
       {children}
     </RNText>
   );

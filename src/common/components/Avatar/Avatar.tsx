@@ -1,8 +1,8 @@
 import { Image } from 'expo-image';
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
+import { styles } from './Avatar.styles';
 import { AVATAR_SIZES } from './Avatar.types';
 import type { AvatarProps } from './Avatar.types';
 
@@ -10,16 +10,13 @@ export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel
   const dimension = AVATAR_SIZES[size];
   const fontSize = dimension * 0.4;
 
-  const containerStyle = [
-    styles.container,
-    { width: dimension, height: dimension, borderRadius: dimension / 2 },
-  ];
+  styles.useVariants({ size });
 
   if (source) {
     return (
       <Image
         source={source}
-        style={containerStyle}
+        style={styles.container}
         contentFit="cover"
         accessibilityRole="image"
         accessibilityLabel={accessibilityLabel}
@@ -30,7 +27,7 @@ export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel
   if (initials) {
     return (
       <View
-        style={containerStyle}
+        style={styles.container}
         accessibilityRole="image"
         accessibilityLabel={accessibilityLabel}
       >
@@ -44,7 +41,7 @@ export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel
   if (icon) {
     return (
       <View
-        style={containerStyle}
+        style={styles.container}
         accessibilityRole="image"
         accessibilityLabel={accessibilityLabel}
       >
@@ -55,7 +52,7 @@ export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel
 
   return (
     <View
-      style={containerStyle}
+      style={styles.container}
       accessibilityRole="image"
       accessibilityLabel={accessibilityLabel ?? 'User avatar'}
     >
@@ -63,15 +60,3 @@ export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.brand.primary,
-    overflow: 'hidden',
-  },
-  initials: {
-    color: theme.colors.text.inverse,
-  },
-}));

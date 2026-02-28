@@ -1,6 +1,7 @@
 import { View, ActivityIndicator } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
+import { styles } from './Loading.styles';
 import type { LoadingProps } from './Loading.types';
 
 export function Loading({
@@ -11,9 +12,11 @@ export function Loading({
 }: LoadingProps) {
   const { theme } = useUnistyles();
 
+  styles.useVariants({ fullScreen });
+
   return (
     <View
-      style={fullScreen ? styles.fullScreen : styles.inline}
+      style={styles.container}
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel ?? message ?? 'Loading'}
     >
@@ -26,21 +29,3 @@ export function Loading({
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  inline: {
-    padding: theme.metrics.spacing.p16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fullScreen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.colors.background.app,
-  },
-  message: {
-    marginTop: theme.metrics.spacingV.p12,
-    color: theme.colors.text.secondary,
-  },
-}));
