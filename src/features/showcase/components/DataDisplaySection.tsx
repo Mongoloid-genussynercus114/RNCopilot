@@ -58,6 +58,13 @@ export function DataDisplaySection() {
       </View>
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.dataDisplay.pressableCard')}
+      </Text>
+      <Card variant="elevated" pressable onPress={() => {}}>
+        <Text variant="label">{t('showcase.dataDisplay.tapMe')}</Text>
+      </Card>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.dataDisplay.listItems')}
       </Text>
       <View style={styles.column}>
@@ -65,12 +72,22 @@ export function DataDisplaySection() {
           title={t('showcase.demo.sampleTitle')}
           subtitle={t('showcase.demo.sampleText')}
           left={<Avatar initials="AB" size="sm" />}
+          onPress={() => {}}
           divider
         />
         <ListItem
           title={t('showcase.demo.sampleTitle')}
           left={<Avatar initials="CD" size="sm" />}
         />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.dataDisplay.listItemSizes')}
+      </Text>
+      <View style={styles.column}>
+        <ListItem title={t('showcase.form.small')} size="sm" divider />
+        <ListItem title={t('showcase.form.medium')} size="md" divider />
+        <ListItem title={t('showcase.form.large')} size="lg" />
       </View>
     </View>
   );

@@ -19,16 +19,41 @@ export function OverlaySection({ state }: OverlaySectionProps) {
       <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.overlay.dialog')}
       </Text>
-      <Button
-        title={t('showcase.overlay.openDialog')}
-        variant="outline"
-        onPress={() => state.setDialogVisible(true)}
-      />
+      <View style={styles.row}>
+        <Button
+          title={t('showcase.overlay.openDialogSm')}
+          variant="outline"
+          size="sm"
+          onPress={() => {
+            state.setDialogSize('sm');
+            state.setDialogVisible(true);
+          }}
+        />
+        <Button
+          title={t('showcase.overlay.openDialog')}
+          variant="outline"
+          size="sm"
+          onPress={() => {
+            state.setDialogSize('md');
+            state.setDialogVisible(true);
+          }}
+        />
+        <Button
+          title={t('showcase.overlay.openDialogLg')}
+          variant="outline"
+          size="sm"
+          onPress={() => {
+            state.setDialogSize('lg');
+            state.setDialogVisible(true);
+          }}
+        />
+      </View>
       <Dialog
         visible={state.dialogVisible}
         onDismiss={() => state.setDialogVisible(false)}
         title={t('showcase.overlay.dialogTitle')}
         message={t('showcase.overlay.dialogMessage')}
+        size={state.dialogSize}
         actions={[
           {
             label: t('common.cancel'),
@@ -89,5 +114,10 @@ const styles = StyleSheet.create((theme) => ({
   subheading: {
     marginTop: theme.metrics.spacingV.p12,
     marginBottom: theme.metrics.spacingV.p8,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: theme.metrics.spacing.p8,
   },
 }));

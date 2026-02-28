@@ -59,6 +59,15 @@ export function FormSection({ state }: FormSectionProps) {
       </View>
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.inputSizes')}
+      </Text>
+      <View style={styles.column}>
+        <Input placeholder={t('showcase.form.small')} size="sm" value="" onChangeText={() => {}} />
+        <Input placeholder={t('showcase.form.medium')} size="md" value="" onChangeText={() => {}} />
+        <Input placeholder={t('showcase.form.large')} size="lg" value="" onChangeText={() => {}} />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.form.textArea')}
       </Text>
       <TextArea
@@ -81,6 +90,24 @@ export function FormSection({ state }: FormSectionProps) {
       />
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.searchBarSizes')}
+      </Text>
+      <View style={styles.column}>
+        <SearchBar
+          value=""
+          onChangeText={() => {}}
+          placeholder={t('showcase.form.small')}
+          size="sm"
+        />
+        <SearchBar
+          value=""
+          onChangeText={() => {}}
+          placeholder={t('showcase.form.large')}
+          size="lg"
+        />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.form.select')}
       </Text>
       <Select
@@ -92,6 +119,26 @@ export function FormSection({ state }: FormSectionProps) {
       />
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.selectSizes')}
+      </Text>
+      <View style={styles.column}>
+        <Select
+          placeholder={t('showcase.form.small')}
+          size="sm"
+          value=""
+          onChange={() => {}}
+          options={SELECT_OPTIONS}
+        />
+        <Select
+          placeholder={t('showcase.form.large')}
+          size="lg"
+          value=""
+          onChange={() => {}}
+          options={SELECT_OPTIONS}
+        />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.form.radioGroup')}
       </Text>
       <RadioGroup
@@ -99,6 +146,24 @@ export function FormSection({ state }: FormSectionProps) {
         onChange={state.setSelectedRadio}
         options={radioOptions}
       />
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.radioGroupSizes')}
+      </Text>
+      <View style={styles.column}>
+        <RadioGroup
+          value="option1"
+          onChange={() => {}}
+          options={[{ value: 'option1', label: t('showcase.form.small') }]}
+          size="sm"
+        />
+        <RadioGroup
+          value="option1"
+          onChange={() => {}}
+          options={[{ value: 'option1', label: t('showcase.form.large') }]}
+          size="lg"
+        />
+      </View>
 
       <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.form.segmentedControl')}
@@ -119,6 +184,33 @@ export function FormSection({ state }: FormSectionProps) {
       />
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.checkboxStates')}
+      </Text>
+      <View style={styles.column}>
+        <Checkbox
+          checked={true}
+          indeterminate
+          onChange={() => {}}
+          label={t('showcase.form.indeterminate')}
+        />
+        <Checkbox
+          checked={false}
+          onChange={() => {}}
+          label={t('showcase.action.disabled')}
+          disabled
+        />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.checkboxSizes')}
+      </Text>
+      <View style={styles.row}>
+        <Checkbox checked={true} onChange={() => {}} size="sm" label={t('showcase.form.small')} />
+        <Checkbox checked={true} onChange={() => {}} size="md" label={t('showcase.form.medium')} />
+        <Checkbox checked={true} onChange={() => {}} size="lg" label={t('showcase.form.large')} />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.form.switch')}
       </Text>
       <Switch
@@ -126,6 +218,14 @@ export function FormSection({ state }: FormSectionProps) {
         onValueChange={state.setSwitchValue}
         label={t('showcase.form.enableNotifications')}
       />
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.form.switchSizes')}
+      </Text>
+      <View style={styles.column}>
+        <Switch value={true} onValueChange={() => {}} size="sm" label={t('showcase.form.small')} />
+        <Switch value={true} onValueChange={() => {}} size="lg" label={t('showcase.form.large')} />
+      </View>
     </View>
   );
 }
@@ -134,6 +234,12 @@ const styles = StyleSheet.create((theme) => ({
   subheading: {
     marginTop: theme.metrics.spacingV.p12,
     marginBottom: theme.metrics.spacingV.p8,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: theme.metrics.spacing.p12,
   },
   column: {
     gap: theme.metrics.spacingV.p8,

@@ -83,6 +83,14 @@ export function FeedbackSection({ state }: FeedbackSectionProps) {
         actionLabel={t('showcase.feedback.addItems')}
         onAction={() => {}}
       />
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.feedback.emptyStateSizes')}
+      </Text>
+      <View style={styles.column}>
+        <EmptyState title={t('showcase.feedback.nothingHere')} size="sm" />
+        <EmptyState title={t('showcase.feedback.nothingHere')} size="lg" />
+      </View>
     </View>
   );
 }

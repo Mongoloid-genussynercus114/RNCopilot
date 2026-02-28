@@ -1,8 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
-import type { SnackbarVariant } from '@/common/components';
+import type { ComponentSize, SnackbarVariant } from '@/common/components';
 
 export function useShowcaseState() {
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogSize, setDialogSize] = useState<ComponentSize>('md');
   const [menuVisible, setMenuVisible] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarVariant, setSnackbarVariant] = useState<SnackbarVariant>('neutral');
@@ -30,6 +31,8 @@ export function useShowcaseState() {
   return {
     dialogVisible,
     setDialogVisible,
+    dialogSize,
+    setDialogSize,
     menuVisible,
     setMenuVisible,
     snackbarVisible,
