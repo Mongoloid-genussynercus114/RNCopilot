@@ -1,0 +1,10 @@
+import type { TextInputProps } from 'react-native';
+
+export interface InputProps extends TextInputProps {
+  label?: string;
+  error?: string;
+  helperText?: string;
+  disabled?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+}

@@ -1,0 +1,9 @@
+export interface SearchBarProps {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder?: string;
+  onSubmit?: () => void;
+  onClear?: () => void;
+  loading?: boolean;
+  autoFocus?: boolean;
+}

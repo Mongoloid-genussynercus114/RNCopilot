@@ -1,30 +1,76 @@
 {
   "expo": {
-    "name": "game-hub",
-    "slug": "game-hub",
+    "name": "My App",
+    "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "scheme": "game-hub",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "supportsRTL": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.myapp.app",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "CFBundleLocalizations": ["en", "ar"],
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "buildNumber": "1"
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#0F172A"
       },
-      "predictiveBackGestureEnabled": false
+      "edgeToEdgeEnabled": true,
+      "package": "com.myapp.app"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": ""
+      }
+    },
+    "plugins": [
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "ar"],
+            "android": ["en", "ar"]
+          }
+        }
+      ],
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#0F172A",
+          "dark": {
+            "image": "./assets/images/splash-icon.png",
+            "backgroundColor": "#020617"
+          }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": []
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
     }
   }
 }

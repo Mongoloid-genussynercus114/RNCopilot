@@ -1,0 +1,221 @@
+{
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "done": "تم",
+    "retry": "إعادة المحاولة",
+    "search": "بحث",
+    "settings": "الإعدادات",
+    "close": "إغلاق",
+    "edit": "تعديل",
+    "submit": "إرسال",
+    "ok": "حسنًا"
+  },
+  "tabs": {
+    "home": "الرئيسية",
+    "settings": "الإعدادات"
+  },
+  "home": {
+    "welcome": "مرحبًا",
+    "subtitle": "تطبيقك جاهز للاستخدام."
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "appearance": "المظهر",
+    "darkMode": "الوضع الداكن",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+    "haptics": "الاهتزاز",
+    "about": "حول",
+    "version": "الإصدار",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة"
+  },
+  "errorBoundary": {
+    "title": "حدث خطأ ما",
+    "message": "واجه التطبيق خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "retry": "حاول مرة أخرى"
+  },
+  "network": {
+    "offline": "يبدو أنك غير متصل بالإنترنت",
+    "online": "عدت للاتصال"
+  },
+  "notFound": {
+    "title": "غير موجود",
+    "message": "هذه الشاشة غير موجودة.",
+    "goHome": "الذهاب إلى الشاشة الرئيسية"
+  },
+  "errors": {
+    "title": "خطأ",
+    "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "network": "خطأ في الشبكة. تحقق من اتصالك.",
+    "auth": "فشل التحقق من الهوية."
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+    "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين",
+    "usernameMin": "يجب أن يكون اسم المستخدم 3 أحرف على الأقل",
+    "usernameMax": "يجب ألا يتجاوز اسم المستخدم 20 حرفًا",
+    "usernameFormat": "يمكن أن يحتوي اسم المستخدم على أحرف وأرقام وشرطات سفلية فقط"
+  },
+  "auth": {
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجل دخولك للمتابعة",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "ابدأ اليوم",
+      "username": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "submit": "إنشاء حساب",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    },
+    "logout": "تسجيل الخروج"
+  },
+  "showcase": {
+    "title": "عرض المكونات",
+    "subtitle": "استكشف جميع المكونات المتاحة وأشكالها المختلفة",
+    "sections": {
+      "action": "الإجراءات",
+      "dataDisplay": "عرض البيانات",
+      "disclosure": "الإفصاح",
+      "feedback": "التغذية الراجعة",
+      "form": "النموذج",
+      "layout": "التخطيط",
+      "overlay": "الطبقات العلوية",
+      "typography": "الطباعة"
+    },
+    "action": {
+      "primary": "رئيسي",
+      "secondary": "ثانوي",
+      "outline": "محدد",
+      "ghost": "شفاف",
+      "variants": "الأشكال",
+      "sizes": "الأحجام",
+      "states": "الحالات",
+      "withIcon": "مع أيقونة",
+      "loading": "جارٍ التحميل",
+      "disabled": "معطّل",
+      "iconButtons": "أزرار الأيقونات"
+    },
+    "dataDisplay": {
+      "avatarSizes": "أحجام الصورة الرمزية",
+      "badgeVariants": "أشكال الشارة",
+      "cardVariants": "أشكال البطاقة",
+      "chipVariants": "أشكال الرقاقة",
+      "listItems": "عناصر القائمة",
+      "defaultCard": "البطاقة الافتراضية",
+      "elevatedCard": "البطاقة المرتفعة",
+      "outlinedCard": "البطاقة المحددة"
+    },
+    "disclosure": {
+      "singleExpand": "توسيع واحد",
+      "multipleExpand": "توسيع متعدد"
+    },
+    "feedback": {
+      "emptyState": "حالة فارغة",
+      "loading": "مؤشرات التحميل",
+      "progressBar": "شريط التقدم",
+      "skeleton": "هيكل عظمي",
+      "snackbar": "شريط الإشعار",
+      "showDefault": "افتراضي",
+      "showSuccess": "نجاح",
+      "showError": "خطأ",
+      "defaultMessage": "هذا إشعار افتراضي",
+      "successMessage": "تمت العملية بنجاح!",
+      "errorMessage": "حدث خطأ ما!",
+      "nothingHere": "لا يوجد شيء هنا بعد",
+      "nothingHereMessage": "أضف بعض العناصر للبدء",
+      "addItems": "إضافة عناصر"
+    },
+    "form": {
+      "input": "حقل الإدخال",
+      "textArea": "منطقة النص",
+      "searchBar": "شريط البحث",
+      "checkbox": "مربع الاختيار",
+      "switch": "مفتاح التبديل",
+      "radioGroup": "مجموعة الاختيار",
+      "segmentedControl": "التحكم المقسّم",
+      "select": "اختيار",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "emailHelper": "لن نشارك بريدك الإلكتروني أبدًا",
+      "passwordLabel": "كلمة المرور",
+      "searchPlaceholder": "ابحث عن مكونات...",
+      "selectPlaceholder": "اختر إطار عمل",
+      "selectLabel": "إطار العمل",
+      "textAreaLabel": "الوصف",
+      "textAreaPlaceholder": "اكتب شيئًا...",
+      "agreeTerms": "أوافق على الشروط",
+      "enableNotifications": "تفعيل الإشعارات"
+    },
+    "overlay": {
+      "dialog": "مربع حوار",
+      "menu": "قائمة",
+      "openDialog": "فتح مربع الحوار",
+      "openMenu": "فتح القائمة",
+      "dialogTitle": "تأكيد الإجراء",
+      "dialogMessage": "هل أنت متأكد أنك تريد المتابعة في هذا الإجراء؟",
+      "menuEdit": "تعديل",
+      "menuShare": "مشاركة",
+      "menuArchive": "أرشفة",
+      "menuDelete": "حذف"
+    },
+    "typography": {
+      "textVariants": "أشكال النص",
+      "textWeights": "أوزان النص",
+      "iconVariants": "أشكال الأيقونة",
+      "iconSizes": "أحجام الأيقونة",
+      "heading1": "عنوان 1",
+      "heading2": "عنوان 2",
+      "heading3": "عنوان 3",
+      "body": "نص أساسي",
+      "bodySmall": "نص صغير",
+      "caption": "تعليق",
+      "label": "تسمية",
+      "overline": "سطر علوي",
+      "regular": "عادي",
+      "medium": "متوسط",
+      "semibold": "شبه عريض",
+      "bold": "عريض"
+    },
+    "layout": {
+      "horizontal": "أفقي",
+      "vertical": "عمودي",
+      "bold": "عريض",
+      "inset": "داخلي",
+      "left": "يسار",
+      "center": "وسط",
+      "right": "يمين"
+    },
+    "demo": {
+      "sampleTitle": "عنوان نموذجي",
+      "sampleText": "هذا نص نموذجي لأغراض العرض التوضيحي.",
+      "option1": "الخيار الأول",
+      "option2": "الخيار الثاني",
+      "option3": "الخيار الثالث",
+      "accordionTitle1": "ما هو هذا القالب؟",
+      "accordionContent1": "قالب أساسي لتطبيقات React Native Expo بجودة إنتاجية، مصمم كأساس قابل لإعادة الاستخدام لجميع تطبيقات الهاتف المحمول المستقبلية.",
+      "accordionTitle2": "ما التقنيات المستخدمة؟",
+      "accordionContent2": "React Native وExpo وTypeScript وZustand وReact Query وreact-native-unistyles والمزيد.",
+      "accordionTitle3": "كيف أقوم بتخصيصه؟",
+      "accordionContent3": "اتبع الأنماط الموجودة في المستندات وCLAUDE.md. شغّل npm run reset-showcase للبدء من جديد."
+    }
+  }
+}

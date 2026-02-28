@@ -1,0 +1,221 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "retry": "Retry",
+    "search": "Search",
+    "settings": "Settings",
+    "close": "Close",
+    "edit": "Edit",
+    "submit": "Submit",
+    "ok": "OK"
+  },
+  "tabs": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "subtitle": "Your app is ready to go."
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "notifications": "Notifications",
+    "haptics": "Haptic Feedback",
+    "about": "About",
+    "version": "Version",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "message": "The app ran into an unexpected error. Please try again.",
+    "retry": "Try Again"
+  },
+  "network": {
+    "offline": "You appear to be offline",
+    "online": "Back online"
+  },
+  "notFound": {
+    "title": "Not Found",
+    "message": "This screen does not exist.",
+    "goHome": "Go to home screen"
+  },
+  "errors": {
+    "title": "Error",
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Check your connection.",
+    "auth": "Authentication failed."
+  },
+  "validation": {
+    "required": "This field is required",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "usernameMin": "Username must be at least 3 characters",
+    "usernameMax": "Username must be at most 20 characters",
+    "usernameFormat": "Username can only contain letters, numbers, and underscores"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to continue",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Get started today",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign In"
+    },
+    "logout": "Log Out"
+  },
+  "showcase": {
+    "title": "Component Showcase",
+    "subtitle": "Explore all available components and their variants",
+    "sections": {
+      "action": "Action",
+      "dataDisplay": "Data Display",
+      "disclosure": "Disclosure",
+      "feedback": "Feedback",
+      "form": "Form",
+      "layout": "Layout",
+      "overlay": "Overlay",
+      "typography": "Typography"
+    },
+    "action": {
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "ghost": "Ghost",
+      "variants": "Variants",
+      "sizes": "Sizes",
+      "states": "States",
+      "withIcon": "With Icon",
+      "loading": "Loading",
+      "disabled": "Disabled",
+      "iconButtons": "Icon Buttons"
+    },
+    "dataDisplay": {
+      "avatarSizes": "Avatar Sizes",
+      "badgeVariants": "Badge Variants",
+      "cardVariants": "Card Variants",
+      "chipVariants": "Chip Variants",
+      "listItems": "List Items",
+      "defaultCard": "Default Card",
+      "elevatedCard": "Elevated Card",
+      "outlinedCard": "Outlined Card"
+    },
+    "disclosure": {
+      "singleExpand": "Single Expand",
+      "multipleExpand": "Multiple Expand"
+    },
+    "feedback": {
+      "emptyState": "Empty State",
+      "loading": "Loading Indicators",
+      "progressBar": "Progress Bar",
+      "skeleton": "Skeleton",
+      "snackbar": "Snackbar",
+      "showDefault": "Default",
+      "showSuccess": "Success",
+      "showError": "Error",
+      "defaultMessage": "This is a default snackbar",
+      "successMessage": "Operation completed successfully!",
+      "errorMessage": "Something went wrong!",
+      "nothingHere": "Nothing here yet",
+      "nothingHereMessage": "Add some items to get started",
+      "addItems": "Add Items"
+    },
+    "form": {
+      "input": "Input",
+      "textArea": "Text Area",
+      "searchBar": "Search Bar",
+      "checkbox": "Checkbox",
+      "switch": "Switch",
+      "radioGroup": "Radio Group",
+      "segmentedControl": "Segmented Control",
+      "select": "Select",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "emailHelper": "We'll never share your email",
+      "passwordLabel": "Password",
+      "searchPlaceholder": "Search components...",
+      "selectPlaceholder": "Choose a framework",
+      "selectLabel": "Framework",
+      "textAreaLabel": "Description",
+      "textAreaPlaceholder": "Write something...",
+      "agreeTerms": "I agree to the terms",
+      "enableNotifications": "Enable notifications"
+    },
+    "overlay": {
+      "dialog": "Dialog",
+      "menu": "Menu",
+      "openDialog": "Open Dialog",
+      "openMenu": "Open Menu",
+      "dialogTitle": "Confirm Action",
+      "dialogMessage": "Are you sure you want to proceed with this action?",
+      "menuEdit": "Edit",
+      "menuShare": "Share",
+      "menuArchive": "Archive",
+      "menuDelete": "Delete"
+    },
+    "typography": {
+      "textVariants": "Text Variants",
+      "textWeights": "Text Weights",
+      "iconVariants": "Icon Variants",
+      "iconSizes": "Icon Sizes",
+      "heading1": "Heading 1",
+      "heading2": "Heading 2",
+      "heading3": "Heading 3",
+      "body": "Body",
+      "bodySmall": "Body Small",
+      "caption": "Caption",
+      "label": "Label",
+      "overline": "Overline",
+      "regular": "Regular",
+      "medium": "Medium",
+      "semibold": "Semibold",
+      "bold": "Bold"
+    },
+    "layout": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical",
+      "bold": "Bold",
+      "inset": "Inset",
+      "left": "Left",
+      "center": "Center",
+      "right": "Right"
+    },
+    "demo": {
+      "sampleTitle": "Sample Title",
+      "sampleText": "This is sample text content for demonstration purposes.",
+      "option1": "Option One",
+      "option2": "Option Two",
+      "option3": "Option Three",
+      "accordionTitle1": "What is this template?",
+      "accordionContent1": "A production-grade React Native Expo base template designed as a reusable foundation for all future mobile applications.",
+      "accordionTitle2": "What technologies are used?",
+      "accordionContent2": "React Native, Expo, TypeScript, Zustand, React Query, react-native-unistyles, and more.",
+      "accordionTitle3": "How do I customize it?",
+      "accordionContent3": "Follow the patterns in the docs and CLAUDE.md. Run npm run reset-showcase to start fresh."
+    }
+  }
+}
