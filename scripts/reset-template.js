@@ -128,8 +128,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   setLoading: (isLoading) => set({ isLoading }),
 
-  clearSession: () =>
-    set({ user: null, session: null, isAuthenticated: false }),
+  clearSession: () => set({ user: null, session: null, isAuthenticated: false }),
 
   initialize: async () => {
     // TODO: Add your auth initialization logic here
