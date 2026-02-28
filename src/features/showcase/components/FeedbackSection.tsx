@@ -24,7 +24,7 @@ export function FeedbackSection({ state }: FeedbackSectionProps) {
           title={t('showcase.feedback.showDefault')}
           variant="outline"
           size="sm"
-          onPress={() => state.showSnackbar('default', t('showcase.feedback.defaultMessage'))}
+          onPress={() => state.showSnackbar('neutral', t('showcase.feedback.defaultMessage'))}
         />
         <Button
           title={t('showcase.feedback.showSuccess')}

@@ -1,10 +1,19 @@
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
 import { Button } from '@/common/components/Button';
 import { Text } from '@/common/components/Text';
+import { styles } from './EmptyState.styles';
 import type { EmptyStateProps } from './EmptyState.types';
 
-export function EmptyState({ title, message, icon, actionLabel, onAction }: EmptyStateProps) {
+export function EmptyState({
+  title,
+  message,
+  icon,
+  actionLabel,
+  onAction,
+  size = 'md',
+}: EmptyStateProps) {
+  styles.useVariants({ size });
+
   return (
     <View style={styles.container} accessibilityRole="alert">
       {icon && <View style={styles.iconContainer}>{icon}</View>}
@@ -12,7 +21,7 @@ export function EmptyState({ title, message, icon, actionLabel, onAction }: Empt
         {title}
       </Text>
       {message && (
-        <Text variant="bodySmall" align="center" color={undefined} style={styles.message}>
+        <Text variant="bodySmall" align="center" style={styles.message}>
           {message}
         </Text>
       )}
@@ -22,19 +31,3 @@ export function EmptyState({ title, message, icon, actionLabel, onAction }: Empt
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.metrics.spacing.p32,
-    gap: theme.metrics.spacingV.p12,
-  },
-  iconContainer: {
-    marginBottom: theme.metrics.spacingV.p4,
-  },
-  message: {
-    color: theme.colors.text.secondary,
-  },
-}));

@@ -1,7 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { View, Pressable } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
+import { styles } from './ErrorBoundary.styles';
 
 // ErrorBoundary is a class component that cannot use hooks like useTranslation.
 // These fallback strings are intentionally hardcoded as a last-resort crash screen.
@@ -24,6 +24,8 @@ interface State {
   error: Error | null;
 }
 
+// Note: Class component - cannot use useVariants hook.
+// Styles are extracted to a separate file but applied via style arrays.
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false, error: null };
 
@@ -32,7 +34,6 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Hook for Sentry or other error tracking
     this.props.onError?.(error, errorInfo);
     if (__DEV__) {
       console.error('[ErrorBoundary]', error, errorInfo);
@@ -80,37 +81,3 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.metrics.spacing.p32,
-    backgroundColor: theme.colors.background.app,
-  },
-  icon: {
-    color: theme.colors.state.error,
-    marginBottom: theme.metrics.spacingV.p16,
-  },
-  title: {
-    marginBottom: theme.metrics.spacingV.p8,
-  },
-  message: {
-    color: theme.colors.text.secondary,
-    marginBottom: theme.metrics.spacingV.p24,
-  },
-  errorDetail: {
-    color: theme.colors.text.muted,
-    marginBottom: theme.metrics.spacingV.p24,
-  },
-  button: {
-    backgroundColor: theme.colors.brand.primary,
-    paddingHorizontal: theme.metrics.spacing.p24,
-    paddingVertical: theme.metrics.spacingV.p12,
-    borderRadius: theme.metrics.borderRadius.lg,
-  },
-  buttonText: {
-    color: theme.colors.text.inverse,
-  },
-}));

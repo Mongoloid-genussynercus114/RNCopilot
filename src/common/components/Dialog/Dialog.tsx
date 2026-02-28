@@ -1,8 +1,7 @@
 import { Modal, Pressable, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
 import { Button } from '@/common/components/Button';
 import { Text } from '@/common/components/Text';
-import { hs } from '@/theme/metrics';
+import { styles } from './Dialog.styles';
 import type { DialogProps } from './Dialog.types';
 
 export function Dialog({
@@ -12,7 +11,10 @@ export function Dialog({
   message,
   actions = [],
   children,
+  size = 'md',
 }: DialogProps) {
+  styles.useVariants({ size });
+
   return (
     <Modal
       visible={visible}
@@ -52,33 +54,3 @@ export function Dialog({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  backdrop: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.overlay.modal,
-    padding: theme.metrics.spacing.p32,
-  },
-  card: {
-    width: '100%',
-    maxWidth: hs(400),
-    backgroundColor: theme.colors.background.surface,
-    borderRadius: theme.metrics.borderRadius.xl,
-    padding: theme.metrics.spacing.p24,
-    gap: theme.metrics.spacingV.p12,
-  },
-  title: {
-    color: theme.colors.text.primary,
-  },
-  message: {
-    color: theme.colors.text.secondary,
-  },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    gap: theme.metrics.spacing.p8,
-    marginTop: theme.metrics.spacingV.p8,
-  },
-}));

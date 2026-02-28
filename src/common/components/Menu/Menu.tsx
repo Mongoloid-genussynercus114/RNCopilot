@@ -1,8 +1,8 @@
 import { Modal, Pressable, View } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
-import { hs } from '@/theme/metrics';
+import { styles } from './Menu.styles';
 import type { MenuProps } from './Menu.types';
 
 export function Menu({ visible, onDismiss, anchor, items }: MenuProps) {
@@ -36,13 +36,13 @@ export function Menu({ visible, onDismiss, anchor, items }: MenuProps) {
                   <Icon
                     name={item.icon}
                     size={theme.metrics.iconSize.md}
-                    variant={item.destructive ? 'primary' : 'secondary'}
-                    color={item.destructive ? undefined : undefined}
+                    color={item.destructive ? theme.colors.state.error : undefined}
+                    variant={item.destructive ? undefined : 'secondary'}
                   />
                 )}
                 <Text
                   variant="body"
-                  style={[styles.itemText, item.destructive && styles.destructiveText]}
+                  style={item.destructive ? styles.destructiveText : styles.itemText}
                 >
                   {item.label}
                 </Text>
@@ -54,40 +54,3 @@ export function Menu({ visible, onDismiss, anchor, items }: MenuProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  backdrop: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.overlay.modal,
-  },
-  menu: {
-    backgroundColor: theme.colors.background.surface,
-    borderRadius: theme.metrics.borderRadius.lg,
-    paddingVertical: theme.metrics.spacingV.p4,
-    minWidth: hs(180),
-    maxWidth: hs(280),
-    elevation: theme.colors.shadow.elevationLarge,
-    shadowColor: theme.colors.shadow.color,
-    shadowOffset: { width: 0, height: hs(4) },
-    shadowOpacity: 0.15,
-    shadowRadius: hs(12),
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: theme.metrics.spacingV.p12,
-    paddingHorizontal: theme.metrics.spacing.p16,
-    gap: theme.metrics.spacing.p12,
-  },
-  itemDisabled: {
-    opacity: 0.5,
-  },
-  itemText: {
-    color: theme.colors.text.primary,
-  },
-  destructiveText: {
-    color: theme.colors.state.error,
-  },
-}));

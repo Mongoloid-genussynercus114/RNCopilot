@@ -5,7 +5,7 @@ export function useShowcaseState() {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarVariant, setSnackbarVariant] = useState<SnackbarVariant>('default');
+  const [snackbarVariant, setSnackbarVariant] = useState<SnackbarVariant>('neutral');
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [switchValue, setSwitchValue] = useState(true);

@@ -1,4 +1,4 @@
-export type SnackbarVariant = 'default' | 'success' | 'error';
+export type SnackbarVariant = 'neutral' | 'success' | 'error';
 
 export interface SnackbarAction {
   label: string;

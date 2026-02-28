@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { ComponentSize } from '@/common/components/shared.types';
 
 export interface EmptyStateProps {
   title: string;
@@ -6,4 +7,5 @@ export interface EmptyStateProps {
   icon?: ReactNode;
   actionLabel?: string;
   onAction?: () => void;
+  size?: ComponentSize;
 }

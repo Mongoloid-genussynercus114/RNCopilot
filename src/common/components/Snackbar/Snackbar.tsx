@@ -6,10 +6,8 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
-import { hs } from '@/theme/metrics';
+import { styles } from './Snackbar.styles';
 import type { SnackbarProps } from './Snackbar.types';
 
 export function Snackbar({
@@ -18,19 +16,11 @@ export function Snackbar({
   action,
   duration = 4000,
   onDismiss,
-  variant = 'default',
+  variant = 'neutral',
 }: SnackbarProps) {
-  const { theme } = useUnistyles();
-  const insets = useSafeAreaInsets();
   const translateY = useSharedValue(100);
 
-  const bgColorMap = {
-    default: theme.colors.background.elevated,
-    success: theme.colors.state.success,
-    error: theme.colors.state.error,
-  };
-
-  const textColor = variant === 'default' ? theme.colors.text.primary : theme.colors.text.inverse;
+  styles.useVariants({ variant });
 
   useEffect(() => {
     if (visible) {
@@ -53,14 +43,8 @@ export function Snackbar({
   if (!visible) return null;
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        { backgroundColor: bgColorMap[variant], paddingBottom: insets.bottom + hs(8) },
-        animatedStyle,
-      ]}
-    >
-      <Text variant="bodySmall" weight="medium" color={textColor} style={styles.messageText}>
+    <Animated.View style={[styles.container, animatedStyle]}>
+      <Text variant="bodySmall" weight="medium" style={styles.messageText}>
         {message}
       </Text>
       {action && (
@@ -73,28 +57,3 @@ export function Snackbar({
     </Animated.View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: theme.metrics.spacing.p16,
-    paddingTop: theme.metrics.spacingV.p12,
-    gap: theme.metrics.spacing.p12,
-    elevation: theme.colors.shadow.elevationLarge,
-    shadowColor: theme.colors.shadow.color,
-    shadowOffset: { width: 0, height: hs(-2) },
-    shadowOpacity: 0.1,
-    shadowRadius: hs(8),
-  },
-  messageText: {
-    flex: 1,
-  },
-  actionText: {
-    color: theme.colors.brand.secondary,
-  },
-}));
