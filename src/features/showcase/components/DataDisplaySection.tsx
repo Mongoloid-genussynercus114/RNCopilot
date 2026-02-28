@@ -46,7 +46,7 @@ export function DataDisplaySection() {
         {t('showcase.dataDisplay.cardVariants')}
       </Text>
       <View style={styles.column}>
-        <Card variant="default">
+        <Card variant="filled">
           <Text variant="label">{t('showcase.dataDisplay.defaultCard')}</Text>
         </Card>
         <Card variant="elevated">

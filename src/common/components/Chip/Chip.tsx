@@ -1,8 +1,13 @@
 import { Pressable, View } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import Animated from 'react-native-reanimated';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
+import { styles } from './Chip.styles';
 import type { ChipProps } from './Chip.types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function Chip({
   label,
@@ -15,32 +20,23 @@ export function Chip({
   disabled = false,
 }: ChipProps) {
   const { theme } = useUnistyles();
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
+
+  styles.useVariants({ variant, size, selected, disabled });
 
   return (
-    <Pressable
+    <AnimatedPressable
       onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
       disabled={disabled || !onPress}
       accessibilityRole="button"
       accessibilityLabel={label}
       accessibilityState={{ selected, disabled }}
-      style={[
-        styles.container,
-        size === 'sm' ? styles.sm : styles.md,
-        variant === 'solid' ? styles.solid : styles.outline,
-        selected && styles.selected,
-        disabled && styles.disabled,
-      ]}
+      style={[styles.container, animatedStyle]}
     >
       {icon && <View style={styles.iconWrapper}>{icon}</View>}
-      <Text
-        variant={size === 'sm' ? 'caption' : 'bodySmall'}
-        weight="medium"
-        style={[
-          styles.label,
-          variant === 'solid' && styles.solidLabel,
-          selected && styles.selectedLabel,
-        ]}
-      >
+      <Text variant={size === 'sm' ? 'caption' : 'bodySmall'} weight="medium" style={styles.label}>
         {label}
       </Text>
       {onClose && (
@@ -57,51 +53,6 @@ export function Chip({
           />
         </Pressable>
       )}
-    </Pressable>
+    </AnimatedPressable>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: theme.metrics.borderRadius.full,
-    alignSelf: 'flex-start',
-  },
-  sm: {
-    paddingHorizontal: theme.metrics.spacing.p8,
-    paddingVertical: theme.metrics.spacingV.p4,
-    gap: theme.metrics.spacing.p4,
-  },
-  md: {
-    paddingHorizontal: theme.metrics.spacing.p12,
-    paddingVertical: theme.metrics.spacingV.p8,
-    gap: theme.metrics.spacing.p4,
-  },
-  solid: {
-    backgroundColor: theme.colors.background.surfaceAlt,
-  },
-  outline: {
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-  },
-  selected: {
-    backgroundColor: theme.colors.brand.primary,
-    borderColor: theme.colors.brand.primary,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  iconWrapper: {
-    marginRight: theme.metrics.spacing.p4,
-  },
-  label: {
-    color: theme.colors.text.primary,
-  },
-  solidLabel: {
-    color: theme.colors.text.primary,
-  },
-  selectedLabel: {
-    color: theme.colors.text.inverse,
-  },
-}));

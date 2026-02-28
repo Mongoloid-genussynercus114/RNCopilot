@@ -1,8 +1,12 @@
-import { Pressable, ActivityIndicator } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { ActivityIndicator, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
-import { ICON_BUTTON_SIZES } from './IconButton.types';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
+import { ICON_SIZES, styles } from './IconButton.styles';
 import type { IconButtonProps } from './IconButton.types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function IconButton({
   icon,
@@ -14,7 +18,9 @@ export function IconButton({
   accessibilityLabel,
 }: IconButtonProps) {
   const { theme } = useUnistyles();
-  const sizeConfig = ICON_BUTTON_SIZES[size];
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
+
+  styles.useVariants({ variant, size, disabled: disabled || loading });
 
   const iconColorMap = {
     primary: theme.colors.text.inverse,
@@ -23,52 +29,24 @@ export function IconButton({
     ghost: theme.colors.icon.primary,
   };
 
+  const iconSize = ICON_SIZES[size] ?? ICON_SIZES.md;
+
   return (
-    <Pressable
+    <AnimatedPressable
       onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
       disabled={disabled || loading}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ disabled: disabled || loading, busy: loading }}
-      style={[
-        styles.container,
-        styles[variant],
-        {
-          width: sizeConfig.container,
-          height: sizeConfig.container,
-          borderRadius: sizeConfig.container / 2,
-        },
-        disabled && styles.disabled,
-      ]}
+      style={[styles.container, animatedStyle]}
     >
       {loading ? (
         <ActivityIndicator size="small" color={iconColorMap[variant]} />
       ) : (
-        <Icon name={icon} size={sizeConfig.icon} color={iconColorMap[variant]} />
+        <Icon name={icon} size={iconSize} color={iconColorMap[variant]} />
       )}
-    </Pressable>
+    </AnimatedPressable>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primary: {
-    backgroundColor: theme.colors.brand.primary,
-  },
-  secondary: {
-    backgroundColor: theme.colors.background.surfaceAlt,
-  },
-  outline: {
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-}));

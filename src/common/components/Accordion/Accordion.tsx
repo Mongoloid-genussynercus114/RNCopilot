@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
 import { vs } from '@/theme/metrics';
+import { styles } from './Accordion.styles';
 import type { AccordionItem, AccordionProps } from './Accordion.types';
 
 function AccordionSection({
@@ -38,7 +39,7 @@ function AccordionSection({
   }, [isExpanded, item.disabled, onToggle, rotation, contentHeight]);
 
   return (
-    <View style={[styles.section, item.disabled && styles.disabled]}>
+    <View style={[styles.section, item.disabled && styles.sectionDisabled]}>
       <Pressable
         onPress={handleToggle}
         disabled={item.disabled}
@@ -89,32 +90,3 @@ export function Accordion({ items, multiple = false, defaultExpanded = [] }: Acc
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    borderRadius: theme.metrics.borderRadius.lg,
-    overflow: 'hidden',
-  },
-  section: {
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border.default,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: theme.metrics.spacingV.p12,
-    paddingHorizontal: theme.metrics.spacing.p16,
-  },
-  title: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: theme.metrics.spacing.p16,
-    paddingBottom: theme.metrics.spacingV.p12,
-    overflow: 'hidden',
-  },
-}));

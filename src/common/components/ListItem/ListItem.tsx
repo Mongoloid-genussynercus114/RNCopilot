@@ -1,8 +1,12 @@
 import { Pressable, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import Animated from 'react-native-reanimated';
 import { Divider } from '@/common/components/Divider';
 import { Text } from '@/common/components/Text';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
+import { styles } from './ListItem.styles';
 import type { ListItemProps } from './ListItem.types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function ListItem({
   title,
@@ -12,58 +16,77 @@ export function ListItem({
   onPress,
   divider = false,
   disabled = false,
+  size = 'md',
 }: ListItemProps) {
-  const Wrapper = onPress ? Pressable : View;
-  const wrapperProps = onPress
-    ? {
-        onPress,
-        disabled,
-        accessibilityRole: 'button' as const,
-        accessibilityState: { disabled },
-      }
-    : {};
+  styles.useVariants({ size, disabled });
 
   return (
     <>
-      <Wrapper style={[styles.container, disabled && styles.disabled]} {...wrapperProps}>
-        {left && <View style={styles.left}>{left}</View>}
-        <View style={styles.content}>
-          <Text variant="body">{title}</Text>
-          {subtitle && (
-            <Text variant="bodySmall" style={styles.subtitle}>
-              {subtitle}
-            </Text>
-          )}
+      {onPress ? (
+        <PressableListItem
+          title={title}
+          subtitle={subtitle}
+          left={left}
+          right={right}
+          onPress={onPress}
+          disabled={disabled}
+        />
+      ) : (
+        <View style={styles.container}>
+          {left && <View style={styles.left}>{left}</View>}
+          <View style={styles.content}>
+            <Text variant="body">{title}</Text>
+            {subtitle && (
+              <Text variant="bodySmall" style={styles.subtitle}>
+                {subtitle}
+              </Text>
+            )}
+          </View>
+          {right && <View style={styles.right}>{right}</View>}
         </View>
-        {right && <View style={styles.right}>{right}</View>}
-      </Wrapper>
+      )}
       {divider && <Divider />}
     </>
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: theme.metrics.spacingV.p12,
-    paddingHorizontal: theme.metrics.spacing.p16,
-    gap: theme.metrics.spacing.p12,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  left: {
-    flexShrink: 0,
-  },
-  content: {
-    flex: 1,
-    gap: theme.metrics.spacingV.p4,
-  },
-  subtitle: {
-    color: theme.colors.text.secondary,
-  },
-  right: {
-    flexShrink: 0,
-  },
-}));
+function PressableListItem({
+  title,
+  subtitle,
+  left,
+  right,
+  onPress,
+  disabled,
+}: {
+  title: string;
+  subtitle?: string;
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  onPress: () => void;
+  disabled: boolean;
+}) {
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress({ scale: 0.99 });
+
+  return (
+    <AnimatedPressable
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      disabled={disabled}
+      accessibilityRole="button"
+      accessibilityState={{ disabled }}
+      style={[styles.container, animatedStyle]}
+    >
+      {left && <View style={styles.left}>{left}</View>}
+      <View style={styles.content}>
+        <Text variant="body">{title}</Text>
+        {subtitle && (
+          <Text variant="bodySmall" style={styles.subtitle}>
+            {subtitle}
+          </Text>
+        )}
+      </View>
+      {right && <View style={styles.right}>{right}</View>}
+    </AnimatedPressable>
+  );
+}

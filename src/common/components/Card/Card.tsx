@@ -1,28 +1,58 @@
 import { View, Pressable } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useAnimatedPress } from '@/hooks/useAnimatedPress';
 import { styles } from './Card.styles';
 import type { CardProps } from './Card.types';
 
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 export function Card({
-  variant = 'default',
+  variant = 'filled',
   pressable = false,
   onPress,
   children,
   style,
   ...rest
 }: CardProps) {
-  const cardStyle = [styles.card, variant !== 'default' && styles[variant], style];
+  styles.useVariants({ variant });
 
   if (pressable && onPress) {
     return (
-      <Pressable onPress={onPress} style={cardStyle} accessibilityRole="button" {...rest}>
+      <PressableCard onPress={onPress} style={style} {...rest}>
         {children}
-      </Pressable>
+      </PressableCard>
     );
   }
 
   return (
-    <View style={cardStyle} {...rest}>
+    <View style={[styles.card, style]} {...rest}>
       {children}
     </View>
+  );
+}
+
+function PressableCard({
+  onPress,
+  children,
+  style,
+  ...rest
+}: {
+  onPress: () => void;
+  children: React.ReactNode;
+  style?: CardProps['style'];
+} & Omit<CardProps, 'variant' | 'pressable' | 'onPress' | 'children'>) {
+  const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress({ scale: 0.98 });
+
+  return (
+    <AnimatedPressable
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      style={[styles.card, animatedStyle, style]}
+      accessibilityRole="button"
+      {...rest}
+    >
+      {children}
+    </AnimatedPressable>
   );
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { ComponentSize } from '@/common/components/shared.types';
 
 export interface ListItemProps {
   title: string;
@@ -8,4 +9,5 @@ export interface ListItemProps {
   onPress?: () => void;
   divider?: boolean;
   disabled?: boolean;
+  size?: ComponentSize;
 }
