@@ -2,9 +2,10 @@ import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { useCallback, useMemo, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import type { ListRenderItem } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
+import { styles } from './Select.styles';
 import type { SelectOption, SelectProps } from './Select.types';
 
 export function Select({
@@ -15,10 +16,13 @@ export function Select({
   label,
   error,
   disabled = false,
+  size = 'md',
 }: SelectProps) {
   const { theme } = useUnistyles();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['40%', '60%'], []);
+
+  styles.useVariants({ size, error: !!error, disabled, selected: value !== '' });
 
   const selectedOption = options.find((o) => o.value === value);
   const displayText = selectedOption?.label ?? placeholder ?? '';
@@ -42,14 +46,11 @@ export function Select({
       <Pressable
         onPress={() => handleSelect(item.value)}
         disabled={item.disabled}
-        style={[styles.option, item.disabled && styles.optionDisabled]}
+        style={styles.option}
         accessibilityRole="radio"
         accessibilityState={{ selected: item.value === value, disabled: item.disabled }}
       >
-        <Text
-          variant="body"
-          style={item.value === value ? styles.optionTextSelected : styles.optionText}
-        >
+        <Text variant="body" style={styles.optionText}>
           {item.label}
         </Text>
         {item.value === value && (
@@ -76,7 +77,7 @@ export function Select({
         disabled={disabled}
         accessibilityRole="combobox"
         accessibilityState={{ expanded: false, disabled }}
-        style={[styles.trigger, error && styles.triggerError, disabled && styles.triggerDisabled]}
+        style={styles.trigger}
       >
         <Text variant="body" style={selectedOption ? styles.selectedText : styles.placeholderText}>
           {displayText}
@@ -84,7 +85,7 @@ export function Select({
         <Icon name="chevron-down" size={theme.metrics.iconSize.md} variant="muted" />
       </Pressable>
       {error && (
-        <Text variant="caption" style={styles.error}>
+        <Text variant="caption" style={styles.errorText}>
           {error}
         </Text>
       )}
@@ -106,63 +107,3 @@ export function Select({
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  wrapper: {
-    gap: theme.metrics.spacingV.p4,
-  },
-  label: {
-    color: theme.colors.text.secondary,
-  },
-  trigger: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: theme.colors.background.input,
-    borderRadius: theme.metrics.borderRadius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-    paddingHorizontal: theme.metrics.spacing.p12,
-    paddingVertical: theme.metrics.spacingV.p12,
-  },
-  triggerError: {
-    borderColor: theme.colors.state.error,
-  },
-  triggerDisabled: {
-    opacity: 0.5,
-  },
-  selectedText: {
-    color: theme.colors.text.primary,
-  },
-  placeholderText: {
-    color: theme.colors.text.muted,
-  },
-  error: {
-    color: theme.colors.state.error,
-  },
-  sheetBackground: {
-    backgroundColor: theme.colors.background.surface,
-  },
-  sheetHandle: {
-    backgroundColor: theme.colors.border.default,
-  },
-  listContent: {
-    paddingVertical: theme.metrics.spacingV.p8,
-  },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: theme.metrics.spacingV.p12,
-    paddingHorizontal: theme.metrics.spacing.p16,
-  },
-  optionDisabled: {
-    opacity: 0.5,
-  },
-  optionText: {
-    color: theme.colors.text.primary,
-  },
-  optionTextSelected: {
-    color: theme.colors.brand.primary,
-  },
-}));

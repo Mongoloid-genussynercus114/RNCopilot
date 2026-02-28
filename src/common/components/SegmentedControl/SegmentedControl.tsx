@@ -1,8 +1,7 @@
 import { Pressable, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { StyleSheet } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
-import { hs } from '@/theme/metrics';
+import { styles } from './SegmentedControl.styles';
 import type { SegmentedControlProps } from './SegmentedControl.types';
 
 export function SegmentedControl({
@@ -14,6 +13,8 @@ export function SegmentedControl({
 }: SegmentedControlProps) {
   const selectedIndex = options.findIndex((o) => o.value === value);
   const indicatorPosition = useSharedValue(selectedIndex >= 0 ? selectedIndex : 0);
+
+  styles.useVariants({ size, disabled });
 
   const handleSelect = (optionValue: string, index: number) => {
     if (disabled) return;
@@ -27,14 +28,7 @@ export function SegmentedControl({
   }));
 
   return (
-    <View
-      style={[
-        styles.container,
-        size === 'sm' ? styles.containerSm : styles.containerMd,
-        disabled && styles.disabled,
-      ]}
-      accessibilityRole="tablist"
-    >
+    <View style={styles.container} accessibilityRole="tablist">
       <Animated.View style={[styles.indicator, indicatorStyle]} />
       {options.map((option, index) => {
         const isSelected = option.value === value;
@@ -61,54 +55,3 @@ export function SegmentedControl({
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: 'row',
-    backgroundColor: theme.colors.background.surfaceAlt,
-    borderRadius: theme.metrics.borderRadius.md,
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  containerSm: {
-    padding: hs(2),
-  },
-  containerMd: {
-    padding: hs(3),
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  indicator: {
-    position: 'absolute',
-    top: hs(3),
-    bottom: hs(3),
-    left: hs(3),
-    backgroundColor: theme.colors.background.surface,
-    borderRadius: theme.metrics.borderRadius.md,
-    elevation: 1,
-    shadowColor: theme.colors.shadow.color,
-    shadowOffset: { width: 0, height: hs(1) },
-    shadowOpacity: 0.1,
-    shadowRadius: hs(2),
-  },
-  segment: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: theme.metrics.spacingV.p8,
-    paddingHorizontal: theme.metrics.spacing.p12,
-    gap: theme.metrics.spacing.p4,
-    zIndex: 1,
-  },
-  segmentIcon: {
-    marginRight: theme.metrics.spacing.p4,
-  },
-  selectedText: {
-    color: theme.colors.text.primary,
-  },
-  unselectedText: {
-    color: theme.colors.text.secondary,
-  },
-}));

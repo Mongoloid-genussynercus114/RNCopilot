@@ -1,13 +1,7 @@
 import { StyleSheet, type UnistylesVariants } from 'react-native-unistyles';
 
 export const styles = StyleSheet.create((theme) => ({
-  wrapper: {
-    gap: theme.metrics.spacingV.p4,
-  },
-  label: {
-    color: theme.colors.text.secondary,
-  },
-  inputContainer: {
+  container: {
     flexDirection: 'row' as const,
     alignItems: 'center' as const,
     backgroundColor: theme.colors.background.input,
@@ -25,21 +19,6 @@ export const styles = StyleSheet.create((theme) => ({
         },
         lg: {
           paddingHorizontal: theme.metrics.spacing.p16,
-        },
-      },
-      focused: {
-        true: {
-          borderColor: theme.colors.border.focus,
-        },
-      },
-      error: {
-        true: {
-          borderColor: theme.colors.state.error,
-        },
-      },
-      disabled: {
-        true: {
-          opacity: 0.5,
         },
       },
     },
@@ -62,19 +41,8 @@ export const styles = StyleSheet.create((theme) => ({
           fontSize: theme.fonts.size.lg,
         },
       },
-      disabled: {
-        true: {
-          color: theme.colors.text.muted,
-        },
-      },
     },
-  },
-  errorText: {
-    color: theme.colors.state.error,
-  },
-  helperText: {
-    color: theme.colors.text.muted,
   },
 }));
 
-export type InputStyleVariants = UnistylesVariants<typeof styles>;
+export type SearchBarStyleVariants = UnistylesVariants<typeof styles>;

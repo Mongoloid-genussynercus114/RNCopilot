@@ -1,3 +1,5 @@
+import type { ComponentSize } from '@/common/components/shared.types';
+
 export interface SearchBarProps {
   value: string;
   onChangeText: (text: string) => void;
@@ -6,4 +8,5 @@ export interface SearchBarProps {
   onClear?: () => void;
   loading?: boolean;
   autoFocus?: boolean;
+  size?: ComponentSize;
 }

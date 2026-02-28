@@ -1,8 +1,8 @@
 import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
 import { Input } from '@/common/components/Input';
 import { Text } from '@/common/components/Text';
 import { vs } from '@/theme/metrics';
+import { styles } from './TextArea.styles';
 import type { TextAreaProps } from './TextArea.types';
 
 export function TextArea({
@@ -34,14 +34,3 @@ export function TextArea({
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  textArea: {
-    paddingTop: theme.metrics.spacingV.p12,
-  },
-  counter: {
-    textAlign: 'right',
-    color: theme.colors.text.muted,
-    marginTop: theme.metrics.spacingV.p4,
-  },
-}));

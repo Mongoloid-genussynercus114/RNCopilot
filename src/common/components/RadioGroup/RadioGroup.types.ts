@@ -1,3 +1,5 @@
+import type { ComponentSize } from '@/common/components/shared.types';
+
 export interface RadioOption {
   value: string;
   label: string;
@@ -9,4 +11,5 @@ export interface RadioGroupProps {
   onChange: (value: string) => void;
   options: RadioOption[];
   orientation?: 'vertical' | 'horizontal';
+  size?: ComponentSize;
 }

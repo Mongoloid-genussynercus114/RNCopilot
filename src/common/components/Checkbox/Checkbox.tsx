@@ -1,12 +1,38 @@
 import { Pressable, View } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
-import { hs } from '@/theme/metrics';
+import { styles } from './Checkbox.styles';
 import type { CheckboxProps } from './Checkbox.types';
 
-export function Checkbox({ checked, onChange, disabled = false, label }: CheckboxProps) {
+const ICON_SIZES: Record<string, number> = {
+  sm: 12,
+  md: 16,
+  lg: 20,
+};
+
+export function Checkbox({
+  checked,
+  onChange,
+  disabled = false,
+  indeterminate = false,
+  size = 'md',
+  label,
+}: CheckboxProps) {
   const { theme } = useUnistyles();
+
+  styles.useVariants({
+    size,
+    checked: checked && !indeterminate,
+    indeterminate,
+    disabled,
+  });
+
+  const checkAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: withSpring(checked || indeterminate ? 1 : 0, { damping: 15 }) }],
+    opacity: withSpring(checked || indeterminate ? 1 : 0),
+  }));
 
   return (
     <Pressable
@@ -14,11 +40,23 @@ export function Checkbox({ checked, onChange, disabled = false, label }: Checkbo
       disabled={disabled}
       accessibilityRole="checkbox"
       accessibilityLabel={label}
-      accessibilityState={{ checked, disabled }}
-      style={[styles.container, disabled && styles.disabled]}
+      accessibilityState={{ checked: indeterminate ? 'mixed' : checked, disabled }}
+      style={styles.container}
     >
-      <View style={[styles.box, checked && styles.boxChecked]}>
-        {checked && <Icon name="checkmark" size={theme.metrics.iconSize.xs} color="#FFFFFF" />}
+      <View style={styles.box}>
+        <Animated.View style={checkAnimatedStyle}>
+          {indeterminate ? (
+            <View style={styles.indeterminateDash} />
+          ) : (
+            checked && (
+              <Icon
+                name="checkmark"
+                size={ICON_SIZES[size] ?? theme.metrics.iconSize.xs}
+                color="#FFFFFF"
+              />
+            )
+          )}
+        </Animated.View>
       </View>
       {label && (
         <Text variant="body" style={styles.label}>
@@ -28,31 +66,3 @@ export function Checkbox({ checked, onChange, disabled = false, label }: Checkbo
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.metrics.spacing.p8,
-    paddingVertical: theme.metrics.spacingV.p4,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  box: {
-    width: hs(22),
-    height: hs(22),
-    borderRadius: theme.metrics.borderRadius.sm,
-    borderWidth: 2,
-    borderColor: theme.colors.border.default,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  boxChecked: {
-    backgroundColor: theme.colors.brand.primary,
-    borderColor: theme.colors.brand.primary,
-  },
-  label: {
-    flex: 1,
-  },
-}));

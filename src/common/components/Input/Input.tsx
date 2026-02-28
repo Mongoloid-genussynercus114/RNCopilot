@@ -11,6 +11,7 @@ export function Input({
   error,
   helperText,
   disabled = false,
+  size = 'md',
   leftIcon,
   rightIcon,
   secureTextEntry,
@@ -23,6 +24,13 @@ export function Input({
 
   const isPassword = secureTextEntry !== undefined;
   const shouldObscure = isPassword && !passwordVisible;
+
+  styles.useVariants({
+    size,
+    focused,
+    error: !!error,
+    disabled,
+  });
 
   const passwordToggle = isPassword ? (
     <Pressable
@@ -42,17 +50,10 @@ export function Input({
           {label}
         </Text>
       )}
-      <View
-        style={[
-          styles.inputContainer,
-          focused && styles.inputContainerFocused,
-          error && styles.inputContainerError,
-          disabled && styles.inputContainerDisabled,
-        ]}
-      >
+      <View style={styles.inputContainer}>
         {leftIcon}
         <TextInput
-          style={[styles.input, disabled && styles.inputDisabled, style]}
+          style={[styles.input, style]}
           placeholderTextColor={theme.colors.text.muted}
           editable={!disabled}
           secureTextEntry={shouldObscure}
@@ -71,7 +72,7 @@ export function Input({
         {passwordToggle ?? rightIcon}
       </View>
       {error && (
-        <Text variant="caption" style={styles.error}>
+        <Text variant="caption" style={styles.errorText}>
           {error}
         </Text>
       )}

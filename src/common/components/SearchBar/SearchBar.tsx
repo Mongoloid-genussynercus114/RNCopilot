@@ -1,6 +1,7 @@
 import { View, TextInput, Pressable, ActivityIndicator } from 'react-native';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
+import { styles } from './SearchBar.styles';
 import type { SearchBarProps } from './SearchBar.types';
 
 export function SearchBar({
@@ -11,8 +12,11 @@ export function SearchBar({
   onClear,
   loading = false,
   autoFocus = false,
+  size = 'md',
 }: SearchBarProps) {
   const { theme } = useUnistyles();
+
+  styles.useVariants({ size });
 
   const handleClear = () => {
     onChangeText('');
@@ -51,22 +55,3 @@ export function SearchBar({
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.background.input,
-    borderRadius: theme.metrics.borderRadius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border.default,
-    paddingHorizontal: theme.metrics.spacing.p12,
-    gap: theme.metrics.spacing.p8,
-  },
-  input: {
-    flex: 1,
-    paddingVertical: theme.metrics.spacingV.p12,
-    fontSize: theme.fonts.size.md,
-    color: theme.colors.text.primary,
-  },
-}));

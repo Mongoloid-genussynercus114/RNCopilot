@@ -1,3 +1,5 @@
+import type { ComponentSize } from '@/common/components/shared.types';
+
 export interface SelectOption {
   label: string;
   value: string;
@@ -12,4 +14,5 @@ export interface SelectProps {
   label?: string;
   error?: string;
   disabled?: boolean;
+  size?: ComponentSize;
 }
