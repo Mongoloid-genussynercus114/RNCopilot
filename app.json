@@ -72,7 +72,8 @@
             "./assets/fonts/Inter-Bold.ttf"
           ]
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,
