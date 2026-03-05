@@ -211,14 +211,9 @@ async function stepReset(rl) {
 
   const resetChoice = await askChoice(rl, 'What should we remove?', [
     {
-      label: 'Full reset — remove showcase + auth examples',
+      label: 'Full reset — remove auth examples',
       value: 'full',
       hint: 'recommended for most apps',
-    },
-    {
-      label: 'Showcase only — keep auth feature intact',
-      value: 'showcase',
-      hint: 'if you want the auth forms',
     },
     { label: 'Skip — keep everything as-is', value: 'skip' },
   ]);
@@ -228,15 +223,14 @@ async function stepReset(rl) {
     return;
   }
 
-  const scriptName = resetChoice === 'full' ? 'reset-template.js' : 'reset-showcase.js';
-  const scriptPath = path.join(ROOT, 'scripts', scriptName);
+  const scriptPath = path.join(ROOT, 'scripts', 'reset-template.js');
 
   if (!fileExists(scriptPath)) {
-    error(`Script not found: scripts/${scriptName}`);
+    error('Script not found: scripts/reset-template.js');
     return;
   }
 
-  info(`Running ${scriptName}...`);
+  info('Running reset-template.js...');
   const { execSync } = require('child_process');
   try {
     execSync(`node "${scriptPath}"`, { stdio: 'inherit', cwd: ROOT });
