@@ -19,12 +19,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="showcase"
-        options={{
-          title: t('tabs.showcase'),
-        }}
-      />
-      <Tabs.Screen
         name="settings"
         options={{
           title: t('tabs.settings'),

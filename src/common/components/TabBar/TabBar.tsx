@@ -13,7 +13,6 @@ type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
 const TAB_ICONS: Record<string, { active: IoniconsName; inactive: IoniconsName }> = {
   index: { active: 'home', inactive: 'home-outline' },
-  showcase: { active: 'apps', inactive: 'apps-outline' },
   settings: { active: 'settings', inactive: 'settings-outline' },
 };
 

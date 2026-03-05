@@ -1,36 +1,31 @@
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import { ScreenContainer } from '@/common/components';
-import { TAB_BAR_RESERVED_HEIGHT } from '@/common/components/TabBar';
-import {
-  FeaturedCardsRow,
-  GreetingHeader,
-  QuickActionsRow,
-  RecentActivityList,
-  StatsRow,
-} from '@/features/home/components';
+import { ScreenContainer, Text } from '@/common/components';
 
 export default function HomeTab() {
+  const { t } = useTranslation();
+
   return (
-    <ScreenContainer scrollable edges={['top', 'bottom']}>
-      <View style={styles.content}>
-        <GreetingHeader />
-        <QuickActionsRow />
-        <FeaturedCardsRow />
-        <StatsRow />
-        <RecentActivityList />
-        <View style={styles.footer} />
+    <ScreenContainer>
+      <View style={styles.container}>
+        <Text variant="h1" align="center">
+          {t('home.welcome')}
+        </Text>
+        <Text variant="body" align="center" color="secondary">
+          {t('home.subtitle')}
+        </Text>
       </View>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  content: {
-    paddingTop: theme.metrics.spacingV.p16,
-    gap: theme.metrics.spacingV.p24,
-  },
-  footer: {
-    height: TAB_BAR_RESERVED_HEIGHT,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: theme.metrics.spacing.p32,
+    gap: theme.metrics.spacingV.p8,
   },
 }));

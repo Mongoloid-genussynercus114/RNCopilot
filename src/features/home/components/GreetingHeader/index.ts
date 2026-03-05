@@ -1,1 +1,0 @@
-export { GreetingHeader } from './GreetingHeader';
