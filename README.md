@@ -77,7 +77,7 @@ git clone https://github.com/your-username/react-native-expo-starter.git my-app
 cd my-app
 
 # 2. Install dependencies
-npm install
+npm install --legacy-peer-deps
 
 # 3. Set up environment (optional — app works without Supabase)
 cp .env.example .env
@@ -336,7 +336,7 @@ const { data, isLoading } = useQuery({
 ### Forms
 
 ```typescript
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 

@@ -1,6 +1,8 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { useEffect } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback, useEffect } from 'react';
 import { I18nManager, Platform, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
@@ -11,6 +13,7 @@ import { QueryProvider } from '@/providers';
 import { useAuthStore } from '@/providers/auth/authStore';
 import { initializeTheme } from '@/theme/themeManager';
 
+SplashScreen.preventAutoHideAsync();
 initializeTheme();
 
 const isArabic = i18n.language === 'ar';
@@ -57,8 +60,25 @@ function AppContent() {
 }
 
 export default function RootLayout() {
+  const [fontsLoaded, fontError] = useFonts({
+    'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
+    'Inter-Medium': require('../assets/fonts/Inter-Medium.ttf'),
+    'Inter-SemiBold': require('../assets/fonts/Inter-SemiBold.ttf'),
+    'Inter-Bold': require('../assets/fonts/Inter-Bold.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
-    <GestureHandlerRootView style={styles.rootView}>
+    <GestureHandlerRootView style={styles.rootView} onLayout={onLayoutRootView}>
       <ErrorBoundary>
         <QueryProvider>
           <BottomSheetModalProvider>

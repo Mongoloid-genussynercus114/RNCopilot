@@ -5,14 +5,19 @@
  *
  * This script:
  * 1. Resets the home screen to a clean welcome screen
- * 2. Removes the showcase feature directory
- * 3. Removes the auth feature directory (components, services, schemas)
- * 4. Cleans up i18n keys (showcase + auth)
- * 5. Replaces auth store with a minimal stub
- * 6. Resets settings screen to a minimal skeleton
+ * 2. Resets the settings screen to a minimal skeleton
+ * 3. Removes the showcase tab screen file
+ * 4. Updates the tabs layout to remove the showcase tab
+ * 5. Removes the showcase icon entry from TabBar
+ * 6. Removes the showcase feature directory
+ * 7. Removes the home feature directory
+ * 8. Removes the settings feature directory
+ * 9. Removes the auth feature directory (components, services, schemas)
+ * 10. Cleans up i18n keys (showcase, auth)
+ * 11. Replaces auth store with a minimal stub
  *
  * The core infrastructure is preserved:
- * - All 33 shared components (src/common/components/)
+ * - All shared components (src/common/components/)
  * - Theme system, i18n config, API client, storage utils
  * - Providers (QueryProvider, auth store pattern)
  * - Global hooks, integrations, types
@@ -86,6 +91,37 @@ const styles = StyleSheet.create((theme) => ({
     paddingTop: theme.metrics.spacingV.p16,
   },
 }));
+`;
+
+const CLEAN_TABS_LAYOUT = `import { Tabs } from 'expo-router';
+import { useTranslation } from 'react-i18next';
+import { TabBar } from '@/common/components/TabBar';
+
+export default function TabLayout() {
+  const { t } = useTranslation();
+
+  return (
+    <Tabs
+      tabBar={(props) => <TabBar {...props} />}
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: t('tabs.home'),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: t('tabs.settings'),
+        }}
+      />
+    </Tabs>
+  );
+}
 `;
 
 const CLEAN_AUTH_STORE = `import { useEffect } from 'react';
@@ -213,6 +249,21 @@ function removeDirectory(dirPath, label) {
   }
 }
 
+function removeFile(filePath, label) {
+  try {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+      console.log(`  ✓ ${label} removed`);
+      return true;
+    }
+    console.log(`  - ${label} not found (already clean)`);
+    return false;
+  } catch (err) {
+    console.error(`  ✗ Failed to remove ${label}: ${err.message}`);
+    return false;
+  }
+}
+
 function writeFile(filePath, content, label) {
   try {
     const dir = path.dirname(filePath);
@@ -245,6 +296,24 @@ function cleanI18nKeys(filePath, keysToRemove) {
   }
 }
 
+function removeTabBarIcon(iconKey) {
+  try {
+    const tabBarPath = path.join(ROOT, 'src', 'common', 'components', 'TabBar', 'TabBar.tsx');
+    let content = fs.readFileSync(tabBarPath, 'utf-8');
+
+    // Remove the icon entry line (e.g. "  showcase: { active: 'apps', inactive: 'apps-outline' },\n")
+    const regex = new RegExp(`\\s*${iconKey}:\\s*\\{[^}]+\\},?\\n`, 'g');
+    content = content.replace(regex, '\n');
+
+    fs.writeFileSync(tabBarPath, content);
+    console.log(`  ✓ TabBar icon entry '${iconKey}' removed`);
+    return true;
+  } catch (err) {
+    console.error(`  ✗ Failed to update TabBar: ${err.message}`);
+    return false;
+  }
+}
+
 // ─────────────────────────────────────────────
 // Execute
 // ─────────────────────────────────────────────
@@ -264,9 +333,21 @@ writeFile(
   'Settings screen reset'
 );
 
-// 2. Remove example feature directories
+// 2. Remove showcase tab screen and update layout
+console.log('\n📱 Removing showcase tab...');
+removeFile(path.join(ROOT, 'app', '(main)', '(tabs)', 'showcase.tsx'), 'Showcase tab screen');
+writeFile(
+  path.join(ROOT, 'app', '(main)', '(tabs)', '_layout.tsx'),
+  CLEAN_TABS_LAYOUT,
+  'Tabs layout updated (showcase tab removed)'
+);
+removeTabBarIcon('showcase');
+
+// 3. Remove example feature directories
 console.log('\n📦 Removing example features...');
 removeDirectory(path.join(ROOT, 'src', 'features', 'showcase'), 'Showcase feature');
+removeDirectory(path.join(ROOT, 'src', 'features', 'home'), 'Home feature');
+removeDirectory(path.join(ROOT, 'src', 'features', 'settings'), 'Settings feature');
 
 // Remove auth components and schemas (keep services as stub)
 removeDirectory(
@@ -282,7 +363,7 @@ writeFile(
   'Auth service replaced with stub'
 );
 
-// 3. Reset auth store
+// 4. Reset auth store
 console.log('\n🔐 Resetting auth store...');
 writeFile(
   path.join(ROOT, 'src', 'providers', 'auth', 'authStore.ts'),
@@ -290,7 +371,7 @@ writeFile(
   'Auth store reset to minimal stub'
 );
 
-// 4. Clean i18n
+// 5. Clean i18n
 console.log('\n🌍 Cleaning i18n keys...');
 const enPath = path.join(ROOT, 'src', 'i18n', 'locales', 'en.json');
 const arPath = path.join(ROOT, 'src', 'i18n', 'locales', 'ar.json');
@@ -303,11 +384,11 @@ if (cleanI18nKeys(arPath, keysToRemove)) {
   console.log('  ✓ Arabic translations cleaned');
 }
 
-// 5. Summary
+// 6. Summary
 console.log('\n' + '─'.repeat(50));
 console.log('\n✅ Template reset complete!\n');
 console.log('What was kept (infrastructure):');
-console.log('  • 33 shared UI components (src/common/components/)');
+console.log('  • Shared UI components (src/common/components/)');
 console.log('  • Theme system with light/dark mode');
 console.log('  • i18n config with EN/AR support');
 console.log('  • API client with auth interceptors');

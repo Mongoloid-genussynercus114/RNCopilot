@@ -355,36 +355,18 @@ async function stepTheme(rl) {
   // Update light theme
   const lightPath = path.join(ROOT, 'src', 'theme', 'light-theme.ts');
   let lightContent = readFile(lightPath);
-  lightContent = lightContent.replace(
-    /primary: '#[0-9A-Fa-f]{6}'/,
-    `primary: '${preset.light.primary}'`
-  );
-  lightContent = lightContent.replace(
-    /primaryVariant: '#[0-9A-Fa-f]{6}'/,
-    `primaryVariant: '${preset.light.primaryVariant}'`
-  );
-  lightContent = lightContent.replace(
-    /tertiary: '#[0-9A-Fa-f]{6}'/,
-    `tertiary: '${preset.light.tertiary}'`
-  );
+  lightContent = replaceBrandColor(lightContent, 'primary', preset.light.primary);
+  lightContent = replaceBrandColor(lightContent, 'primaryVariant', preset.light.primaryVariant);
+  lightContent = replaceBrandColor(lightContent, 'tertiary', preset.light.tertiary);
   writeFile(lightPath, lightContent);
   success(`Light theme updated — primary: ${preset.light.primary}`);
 
   // Update dark theme
   const darkPath = path.join(ROOT, 'src', 'theme', 'dark-theme.ts');
   let darkContent = readFile(darkPath);
-  darkContent = darkContent.replace(
-    /primary: '#[0-9A-Fa-f]{6}'/,
-    `primary: '${preset.dark.primary}'`
-  );
-  darkContent = darkContent.replace(
-    /primaryVariant: '#[0-9A-Fa-f]{6}'/,
-    `primaryVariant: '${preset.dark.primaryVariant}'`
-  );
-  darkContent = darkContent.replace(
-    /tertiary: '#[0-9A-Fa-f]{6}'/,
-    `tertiary: '${preset.dark.tertiary}'`
-  );
+  darkContent = replaceBrandColor(darkContent, 'primary', preset.dark.primary);
+  darkContent = replaceBrandColor(darkContent, 'primaryVariant', preset.dark.primaryVariant);
+  darkContent = replaceBrandColor(darkContent, 'tertiary', preset.dark.tertiary);
   writeFile(darkPath, darkContent);
   success(`Dark theme updated — primary: ${preset.dark.primary}`);
 
@@ -413,10 +395,12 @@ async function stepLanguages(rl) {
       const configPath = path.join(ROOT, 'src', 'i18n', 'config.ts');
       if (fileExists(configPath)) {
         let config = readFile(configPath);
-        // Remove Arabic import and references
+        // Remove Arabic import line
         config = config.replace(/import\s+ar\s+from.*\n/g, '');
-        config = config.replace(/\s*ar,?\s*/g, ' ');
-        config = config.replace(/['"]ar['"]\s*,?\s*/g, '');
+        // Remove ar: { translation: ar } from resources object
+        config = config.replace(/,?\s*\bar\b:\s*\{\s*translation:\s*\bar\b\s*\}/g, '');
+        // Remove 'ar' from array literals like fallbackLng: ['en', 'ar']
+        config = config.replace(/,\s*['"]ar['"]/g, '');
         writeFile(configPath, config);
         success('i18n config simplified (AR removed)');
       }
@@ -620,7 +604,7 @@ async function stepFeatureScaffold(rl) {
   }
 
   // Create directory structure
-  const dirs = ['components', 'services', 'hooks', 'types', 'constants'];
+  const dirs = ['components', 'services', 'hooks', 'types', 'constants', 'stores', 'schemas'];
   dirs.forEach((dir) => {
     fs.mkdirSync(path.join(featureDir, dir), { recursive: true });
   });
@@ -647,6 +631,18 @@ async function stepFeatureScaffold(rl) {
   writeFile(
     path.join(featureDir, 'components', `${capitalize(featureName)}List.tsx`),
     `import { useTranslation } from 'react-i18next';\nimport { View } from 'react-native';\nimport { StyleSheet } from 'react-native-unistyles';\nimport { Text, Loading, EmptyState } from '@/common/components';\nimport { use${capitalize(featureName)}List } from '../hooks/use${capitalize(featureName)}';\n\nexport function ${capitalize(featureName)}List() {\n  const { t } = useTranslation();\n  const { data, isLoading } = use${capitalize(featureName)}List();\n\n  if (isLoading) return <Loading />;\n\n  if (!data?.length) {\n    return (\n      <EmptyState\n        icon="folder-open-outline"\n        message={t('${featureName}.empty')}\n      />\n    );\n  }\n\n  return (\n    <View style={styles.container}>\n      <Text variant="h2">{t('${featureName}.title')}</Text>\n      {/* TODO: Render your list items here */}\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create((theme) => ({\n  container: {\n    flex: 1,\n    padding: theme.metrics.spacing.p16,\n    gap: theme.metrics.spacingV.p12,\n  },\n}));\n`
+  );
+
+  // Create store placeholder
+  writeFile(
+    path.join(featureDir, 'stores', 'index.ts'),
+    `// Zustand stores for the ${featureName} feature\n`
+  );
+
+  // Create schema placeholder
+  writeFile(
+    path.join(featureDir, 'schemas', 'index.ts'),
+    `// Zod schemas for the ${featureName} feature\n`
   );
 
   // Create barrel export
@@ -682,7 +678,9 @@ async function stepFeatureScaffold(rl) {
   console.log(dim(`      ├── hooks/use${capitalize(featureName)}.ts`));
   console.log(dim(`      ├── services/${featureName}Service.ts`));
   console.log(dim(`      ├── types/${featureName}.types.ts`));
-  console.log(dim(`      └── constants/`));
+  console.log(dim(`      ├── constants/`));
+  console.log(dim(`      ├── stores/`));
+  console.log(dim(`      └── schemas/`));
 }
 
 async function stepEAS(rl) {
@@ -707,11 +705,13 @@ async function stepEAS(rl) {
 
   const eas = readJSON(easPath);
 
+  // Initialize nested path before both asks so it's safe regardless of skip order
+  eas.submit = eas.submit || {};
+  eas.submit.production = eas.submit.production || {};
+  eas.submit.production.ios = eas.submit.production.ios || {};
+
   const appleId = await ask(rl, 'Apple ID email (for iOS App Store)', '');
   if (appleId) {
-    eas.submit = eas.submit || {};
-    eas.submit.production = eas.submit.production || {};
-    eas.submit.production.ios = eas.submit.production.ios || {};
     eas.submit.production.ios.appleId = appleId;
     success(`Apple ID set to ${appleId}`);
   }
@@ -743,6 +743,13 @@ async function stepEAS(rl) {
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function replaceBrandColor(content, key, value) {
+  return content.replace(
+    new RegExp(`(brand:\\s*\\{[^}]*?\\b${key}:\\s*)'#[0-9A-Fa-f]{6}'`, 's'),
+    `$1'${value}'`
+  );
 }
 
 // ─────────────────────────────────────────────

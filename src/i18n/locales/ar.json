@@ -18,11 +18,54 @@
   },
   "tabs": {
     "home": "الرئيسية",
+    "showcase": "العرض",
     "settings": "الإعدادات"
   },
   "home": {
     "welcome": "مرحبًا",
-    "subtitle": "تطبيقك جاهز للاستخدام."
+    "subtitle": "تطبيقك جاهز للاستخدام.",
+    "greetingMorning": "صباح الخير",
+    "greetingAfternoon": "مساء الخير",
+    "greetingEvening": "مساء الخير",
+    "userName": "أليكس جونسون",
+    "searchPlaceholder": "ابحث عن أي شيء...",
+    "quickActions": {
+      "send": "إرسال",
+      "receive": "استلام",
+      "pay": "دفع",
+      "more": "المزيد"
+    },
+    "featured": {
+      "title": "المميز",
+      "seeAll": "عرض الكل",
+      "card1Title": "نظام التصميم",
+      "card1Subtitle": "بناء واجهات متسقة باستخدام الرموز",
+      "card2Title": "التحليلات",
+      "card2Subtitle": "تتبع مقاييس الأداء",
+      "card3Title": "التكاملات",
+      "card3Subtitle": "اربط أدواتك المفضلة"
+    },
+    "stats": {
+      "projects": "المشاريع",
+      "tasks": "المهام",
+      "messages": "الرسائل"
+    },
+    "recentActivity": {
+      "title": "النشاط الأخير",
+      "seeAll": "عرض الكل",
+      "item1Title": "مشروع جديد",
+      "item1Subtitle": "إعادة تصميم التطبيق",
+      "item1Time": "منذ دقيقتين",
+      "item2Title": "مهمة مكتملة",
+      "item2Subtitle": "تحديث رموز التصميم",
+      "item2Time": "منذ ١٥ دقيقة",
+      "item3Title": "رسالة مستلمة",
+      "item3Subtitle": "سارة شاركت ملفًا",
+      "item3Time": "منذ ساعة",
+      "item4Title": "دفعة تمت معالجتها",
+      "item4Subtitle": "الفاتورة #١٠٤٢ مدفوعة",
+      "item4Time": "منذ ٣ ساعات"
+    }
   },
   "settings": {
     "title": "الإعدادات",
@@ -34,7 +77,46 @@
     "about": "حول",
     "version": "الإصدار",
     "privacy": "سياسة الخصوصية",
-    "terms": "شروط الخدمة"
+    "terms": "شروط الخدمة",
+    "profile": {
+      "name": "أليكس جونسون",
+      "email": "alex@example.com",
+      "editProfile": "تعديل الملف الشخصي"
+    },
+    "sections": {
+      "account": "الحساب",
+      "preferences": "التفضيلات",
+      "support": "الدعم",
+      "danger": "منطقة الخطر"
+    },
+    "account": {
+      "profile": "الملف الشخصي",
+      "profileSubtitle": "إدارة معلوماتك الشخصية",
+      "security": "الأمان",
+      "securitySubtitle": "كلمة المرور والمصادقة",
+      "billing": "الفواتير",
+      "billingSubtitle": "الخطط وطرق الدفع",
+      "notifications": "الإشعارات",
+      "notificationsSubtitle": "تفضيلات الإشعارات والبريد"
+    },
+    "preferences": {
+      "pushNotifications": "إشعارات الدفع",
+      "appIcon": "أيقونة التطبيق",
+      "appIconSubtitle": "اختر نمط الأيقونة"
+    },
+    "support": {
+      "helpCenter": "مركز المساعدة",
+      "helpCenterSubtitle": "الأسئلة الشائعة والأدلة",
+      "feedback": "إرسال ملاحظات",
+      "feedbackSubtitle": "ساعدنا في التحسين",
+      "aboutSubtitle": "الإصدار والمعلومات القانونية"
+    },
+    "danger": {
+      "logout": "تسجيل الخروج",
+      "logoutSubtitle": "الخروج من حسابك",
+      "deleteAccount": "حذف الحساب",
+      "deleteAccountSubtitle": "إزالة بياناتك نهائيًا"
+    }
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",

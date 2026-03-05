@@ -597,11 +597,13 @@ This is a reusable template. When adapting it for a specific app (e-commerce, ga
 
 ## Additional Documentation
 
-| File                 | Contents                                        |
-| -------------------- | ----------------------------------------------- |
-| `CONVENTIONS.md`     | Complete coding conventions reference           |
-| `docs/AI-GUIDE.md`   | Pattern cookbook, file templates, anti-patterns |
-| `docs/COMPONENTS.md` | Full API reference for all 33 components        |
-| `docs/MIGRATION.md`  | Step-by-step template migration guide           |
-| `docs/llms.txt`      | Plain text summary for LLM context              |
-| `CLAUDE.md`          | Claude Code specific project instructions       |
+| File                   | Contents                                        |
+| ---------------------- | ----------------------------------------------- |
+| `CONVENTIONS.md`       | Complete coding conventions reference           |
+| `docs/AI-GUIDE.md`     | Pattern cookbook, file templates, anti-patterns |
+| `docs/COMPONENTS.md`   | Full API reference for all 33 components        |
+| `docs/MIGRATION.md`    | Step-by-step template migration guide           |
+| `docs/ARCHITECTURE.md` | Architecture overview                           |
+| `docs/SETUP.md`        | Setup guide                                     |
+| `docs/llms.txt`        | Plain text summary for LLM context              |
+| `CLAUDE.md`            | Claude Code specific project instructions       |

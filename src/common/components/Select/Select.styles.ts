@@ -76,13 +76,9 @@ export const styles = StyleSheet.create((theme) => ({
   },
   optionText: {
     color: theme.colors.text.primary,
-    variants: {
-      selected: {
-        true: {
-          color: theme.colors.brand.primary,
-        },
-      },
-    },
+  },
+  optionTextSelected: {
+    color: theme.colors.brand.primary,
   },
 }));
 

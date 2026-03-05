@@ -3,8 +3,6 @@
 All 33 shared components live in `src/common/components/`. Import from the barrel:
 
 ```typescript
-import { Button, Text, Card } from '@/common/components/Button';
-// or from the top-level barrel
 import { Button, Text, Card } from '@/common/components';
 ```
 

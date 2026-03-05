@@ -16,10 +16,14 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "type-check": "tsc --noEmit",
     "prepare": "husky",
-    "validate": "npm run type-check && npm run lint && npm run format:check",
+    "validate": "npm run type-check && npm run lint && npm run format:check && npm run i18n:check",
     "migrate": "node scripts/migrate.js",
     "reset-showcase": "node scripts/reset-showcase.js",
-    "reset-template": "node scripts/reset-template.js"
+    "reset-template": "node scripts/reset-template.js",
+    "scaffold": "node scripts/scaffold.js",
+    "doctor": "node scripts/doctor.js",
+    "i18n:check": "node scripts/i18n-check.js",
+    "check-env": "node scripts/check-env.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",

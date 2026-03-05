@@ -19,7 +19,7 @@ export const styles = StyleSheet.create((theme) => ({
           paddingVertical: theme.metrics.spacingV.p12,
         },
         lg: {
-          paddingVertical: theme.metrics.spacingV.p16,
+          paddingVertical: theme.metrics.spacingV.p24,
         },
       },
       disabled: {

@@ -15,7 +15,6 @@ export function useShowcaseState() {
   const [searchValue, setSearchValue] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('option1');
   const [selectedSegment, setSelectedSegment] = useState('tab1');
-  const [selectValue, setSelectValue] = useState('');
   const [textAreaValue, setTextAreaValue] = useState('');
   const menuAnchorRef = useRef(null);
 
@@ -56,8 +55,6 @@ export function useShowcaseState() {
     setSelectedRadio,
     selectedSegment,
     setSelectedSegment,
-    selectValue,
-    setSelectValue,
     textAreaValue,
     setTextAreaValue,
   };

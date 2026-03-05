@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
@@ -26,6 +27,7 @@ interface FormSectionProps {
 
 export function FormSection({ state }: FormSectionProps) {
   const { t } = useTranslation();
+  const [selectValue, setSelectValue] = useState('');
 
   const radioOptions = RADIO_OPTION_KEYS.map((key, index) => ({
     value: `option${index + 1}`,
@@ -113,8 +115,8 @@ export function FormSection({ state }: FormSectionProps) {
       <Select
         label={t('showcase.form.selectLabel')}
         placeholder={t('showcase.form.selectPlaceholder')}
-        value={state.selectValue}
-        onChange={state.setSelectValue}
+        value={selectValue}
+        onChange={setSelectValue}
         options={SELECT_OPTIONS}
       />
 

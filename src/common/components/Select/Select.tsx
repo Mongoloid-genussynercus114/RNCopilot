@@ -1,4 +1,5 @@
-import { BottomSheetFlatList, BottomSheetModal } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetFlatList, BottomSheetModal } from '@gorhom/bottom-sheet';
+import type { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { useCallback, useMemo, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import type { ListRenderItem } from 'react-native';
@@ -37,7 +38,7 @@ export function Select({
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['40%', '60%'], []);
 
-  styles.useVariants({ size, error: !!error, disabled, selected: value !== '' });
+  styles.useVariants({ size, error: !!error, disabled });
 
   const selectedOption = options.find((o) => o.value === value);
   const displayText = selectedOption?.label ?? placeholder ?? '';
@@ -50,10 +51,22 @@ export function Select({
 
   const handleSelect = useCallback(
     (optionValue: string) => {
-      onChange(optionValue);
       bottomSheetRef.current?.dismiss();
+      requestAnimationFrame(() => onChange(optionValue));
     },
     [onChange]
+  );
+
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        pressBehavior="close"
+      />
+    ),
+    []
   );
 
   const renderItem: ListRenderItem<SelectOption> = useCallback(
@@ -65,7 +78,10 @@ export function Select({
         accessibilityRole="radio"
         accessibilityState={{ selected: item.value === value, disabled: item.disabled }}
       >
-        <Text variant="body" style={styles.optionText}>
+        <Text
+          variant="body"
+          style={[styles.optionText, item.value === value && styles.optionTextSelected]}
+        >
           {item.label}
         </Text>
         {item.value === value && <Icon name="checkmark" sizeVariant="lg" variant="primary" />}
@@ -102,6 +118,7 @@ export function Select({
         ref={bottomSheetRef}
         snapPoints={snapPoints}
         enablePanDownToClose
+        backdropComponent={renderBackdrop}
         backgroundStyle={styles.sheetBackground}
         handleIndicatorStyle={styles.sheetHandle}
       >
