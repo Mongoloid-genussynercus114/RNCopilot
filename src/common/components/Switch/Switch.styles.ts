@@ -35,9 +35,11 @@ export const styles = StyleSheet.create((theme) => ({
         sm: {
           transform: [{ scale: 0.8 }],
         },
-        md: {},
+        md: {
+          transform: [{ scale: 1.0 }],
+        },
         lg: {
-          transform: [{ scale: 1.15 }],
+          transform: [{ scale: 1.2 }],
         },
       },
     },

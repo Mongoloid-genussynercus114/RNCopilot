@@ -2,6 +2,16 @@ import { View, ScrollView } from 'react-native';
 import { styles } from './ScreenContainer.styles';
 import type { ScreenContainerProps } from './ScreenContainer.types';
 
+/**
+ * A safe-area-aware screen wrapper that supports both static and scrollable layouts.
+ *
+ * @example
+ * ```tsx
+ * <ScreenContainer scrollable padded edges={['top', 'bottom']}>
+ *   <Text>Screen content</Text>
+ * </ScreenContainer>
+ * ```
+ */
 export function ScreenContainer({
   children,
   scrollable = false,

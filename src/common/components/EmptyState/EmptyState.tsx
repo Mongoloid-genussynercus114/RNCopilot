@@ -4,6 +4,19 @@ import { Text } from '@/common/components/Text';
 import { styles } from './EmptyState.styles';
 import type { EmptyStateProps } from './EmptyState.types';
 
+/**
+ * A placeholder view displayed when a list or section has no content.
+ *
+ * @example
+ * ```tsx
+ * <EmptyState
+ *   title="No results"
+ *   message="Try a different search term."
+ *   actionLabel="Clear filters"
+ *   onAction={handleClear}
+ * />
+ * ```
+ */
 export function EmptyState({
   title,
   message,

@@ -125,7 +125,8 @@
       "defaultCard": "البطاقة المعبأة",
       "elevatedCard": "البطاقة المرتفعة",
       "outlinedCard": "البطاقة المحددة",
-      "tapMe": "اضغط عليّ!"
+      "tapMe": "اضغط عليّ!",
+      "chipSizes": "أحجام الرقاقة"
     },
     "disclosure": {
       "singleExpand": "توسيع واحد",
@@ -193,7 +194,8 @@
       "menuEdit": "تعديل",
       "menuShare": "مشاركة",
       "menuArchive": "أرشفة",
-      "menuDelete": "حذف"
+      "menuDelete": "حذف",
+      "openDialogLocked": "نافذة مقفلة"
     },
     "typography": {
       "textVariants": "أشكال النص",

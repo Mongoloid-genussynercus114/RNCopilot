@@ -19,36 +19,40 @@ export default function HomeTab() {
   const showcaseState = useShowcaseState();
 
   return (
-    <ScreenContainer scrollable edges={['top', 'bottom']}>
-      <View style={styles.header}>
-        <Text variant="h1">{t('showcase.title')}</Text>
-        <Text variant="bodySmall" color="secondary">
-          {t('showcase.subtitle')}
-        </Text>
-      </View>
+    <View style={styles.screen}>
+      <ScreenContainer scrollable edges={['top', 'bottom']}>
+        <View style={styles.header}>
+          <Text variant="h1">{t('showcase.title')}</Text>
+          <Text variant="bodySmall" color="secondary">
+            {t('showcase.subtitle')}
+          </Text>
+        </View>
 
-      <TypographySection />
-      <ActionSection />
-      <DataDisplaySection />
-      <FormSection state={showcaseState} />
-      <FeedbackSection state={showcaseState} />
-      <DisclosureSection />
-      <LayoutSection />
-      <OverlaySection state={showcaseState} />
+        <TypographySection />
+        <ActionSection />
+        <DataDisplaySection />
+        <FormSection state={showcaseState} />
+        <FeedbackSection state={showcaseState} />
+        <DisclosureSection />
+        <LayoutSection />
+        <OverlaySection state={showcaseState} />
 
-      <View style={styles.footer} />
-
+        <View style={styles.footer} />
+      </ScreenContainer>
       <Snackbar
         visible={showcaseState.snackbarVisible}
         message={showcaseState.snackbarMessage}
         variant={showcaseState.snackbarVariant}
         onDismiss={showcaseState.dismissSnackbar}
       />
-    </ScreenContainer>
+    </View>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
+  screen: {
+    flex: 1,
+  },
   header: {
     paddingTop: theme.metrics.spacingV.p16,
     gap: theme.metrics.spacingV.p4,

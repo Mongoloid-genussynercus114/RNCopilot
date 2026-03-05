@@ -40,6 +40,7 @@ type AppBreakpoints = typeof breakpoints;
 StyleSheet.configure({
   settings: {
     initialTheme: getInitialThemeName,
+    adaptiveThemes: false,
   },
   breakpoints,
   themes: allThemes,

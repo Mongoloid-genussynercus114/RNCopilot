@@ -6,6 +6,7 @@ import { styles } from './ErrorBoundary.styles';
 // ErrorBoundary is a class component that cannot use hooks like useTranslation.
 // These fallback strings are intentionally hardcoded as a last-resort crash screen.
 // They will only show if something catastrophically breaks before i18n loads.
+/** Hardcoded fallback strings shown when an unrecoverable render error occurs. */
 const FALLBACK_TEXT = {
   icon: '!',
   title: 'Something went wrong',
@@ -13,19 +14,37 @@ const FALLBACK_TEXT = {
   retry: 'Try Again',
 } as const;
 
+/** Props for the {@link ErrorBoundary} component. */
 interface Props {
+  /** Child components to render when no error is present. */
   children: ReactNode;
+  /** Custom fallback UI to display instead of the default error screen. */
   fallback?: ReactNode;
+  /** Callback invoked when an error is caught, useful for external logging. */
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
+/** Internal state for the ErrorBoundary component. */
 interface State {
+  /** Whether an error has been caught. */
   hasError: boolean;
+  /** The caught error instance, if any. */
   error: Error | null;
 }
 
-// Note: Class component - cannot use useVariants hook.
-// Styles are extracted to a separate file but applied via style arrays.
+/**
+ * Error boundary that catches render errors and displays a fallback UI.
+ *
+ * Note: Class component -- cannot use hooks such as useVariants.
+ * Styles are extracted to a separate file but applied via style arrays.
+ *
+ * @example
+ * ```tsx
+ * <ErrorBoundary onError={(err) => logToService(err)}>
+ *   <App />
+ * </ErrorBoundary>
+ * ```
+ */
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false, error: null };
 

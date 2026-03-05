@@ -1,9 +1,23 @@
-import { View, TextInput, Pressable, ActivityIndicator } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
+import { useState } from 'react';
+import { View, Pressable } from 'react-native';
 import { Icon } from '@/common/components/Icon';
+import { UniActivityIndicator, UniTextInput } from '@/common/components/uni';
 import { styles } from './SearchBar.styles';
 import type { SearchBarProps } from './SearchBar.types';
 
+/**
+ * A search input with a leading search icon, clear button, and optional loading indicator.
+ *
+ * @example
+ * ```tsx
+ * <SearchBar
+ *   value={query}
+ *   onChangeText={setQuery}
+ *   placeholder="Search items..."
+ *   onSubmit={handleSearch}
+ * />
+ * ```
+ */
 export function SearchBar({
   value,
   onChangeText,
@@ -14,9 +28,8 @@ export function SearchBar({
   autoFocus = false,
   size = 'md',
 }: SearchBarProps) {
-  const { theme } = useUnistyles();
-
-  styles.useVariants({ size });
+  const [focused, setFocused] = useState(false);
+  styles.useVariants({ size, focused });
 
   const handleClear = () => {
     onChangeText('');
@@ -25,21 +38,26 @@ export function SearchBar({
 
   return (
     <View style={styles.container}>
-      <Icon name="search" size={theme.metrics.iconSize.md} variant="muted" />
-      <TextInput
+      <Icon name="search" sizeVariant="md" variant="muted" />
+      <UniTextInput
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor={theme.colors.text.muted}
         returnKeyType="search"
         onSubmitEditing={onSubmit}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
         autoFocus={autoFocus}
         autoCorrect={false}
         accessibilityLabel={placeholder ?? 'Search'}
+        uniProps={(theme) => ({ placeholderTextColor: theme.colors.text.muted })}
       />
       {loading ? (
-        <ActivityIndicator size="small" color={theme.colors.text.muted} />
+        <UniActivityIndicator
+          size="small"
+          uniProps={(theme) => ({ color: theme.colors.text.muted })}
+        />
       ) : (
         value.length > 0 && (
           <Pressable
@@ -48,7 +66,7 @@ export function SearchBar({
             accessibilityRole="button"
             accessibilityLabel="Clear search"
           >
-            <Icon name="close-circle" size={theme.metrics.iconSize.md} variant="muted" />
+            <Icon name="close-circle" sizeVariant="md" variant="muted" />
           </Pressable>
         )
       )}

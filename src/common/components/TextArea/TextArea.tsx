@@ -5,6 +5,20 @@ import { vs } from '@/theme/metrics';
 import { styles } from './TextArea.styles';
 import type { TextAreaProps } from './TextArea.types';
 
+/**
+ * Multi-line text input with optional character counter.
+ *
+ * @example
+ * ```tsx
+ * <TextArea
+ *   value={text}
+ *   onChangeText={setText}
+ *   numberOfLines={6}
+ *   maxLength={500}
+ *   showCount
+ * />
+ * ```
+ */
 export function TextArea({
   numberOfLines = 4,
   maxLength,

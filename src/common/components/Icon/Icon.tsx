@@ -1,34 +1,33 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useUnistyles } from 'react-native-unistyles';
+import { UniIonicons } from '@/common/components/uni';
 import type { IconProps } from './Icon.types';
 
+/**
+ * Renders an Ionicons vector icon with theme-aware color and sizing.
+ *
+ * @example
+ * ```tsx
+ * <Icon name="checkmark-circle" variant="accent" sizeVariant="lg" />
+ * ```
+ */
 export function Icon({
   name,
   variant = 'primary',
   size = 24,
+  sizeVariant,
   color,
+  destructive,
   accessibilityLabel,
 }: IconProps) {
-  const { theme } = useUnistyles();
-
-  const variantColorMap = {
-    primary: theme.colors.icon.primary,
-    secondary: theme.colors.icon.secondary,
-    tertiary: theme.colors.icon.tertiary,
-    muted: theme.colors.icon.muted,
-    inverse: theme.colors.icon.inverse,
-    accent: theme.colors.icon.accent,
-  };
-
-  const resolvedColor = color ?? variantColorMap[variant];
-
   return (
-    <Ionicons
+    <UniIonicons
       name={name}
       size={size}
-      color={resolvedColor}
       accessibilityRole="image"
       accessibilityLabel={accessibilityLabel}
+      uniProps={(theme) => ({
+        color: destructive ? theme.colors.state.error : (color ?? theme.colors.icon[variant]),
+        ...(sizeVariant !== undefined && { size: theme.metrics.iconSize[sizeVariant] }),
+      })}
     />
   );
 }

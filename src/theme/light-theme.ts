@@ -26,7 +26,7 @@ export const lightColors: ThemeColors = {
     surface: '#FFFFFF',
     surfaceAlt: '#F1F5F9',
     section: '#EEF2FF',
-    elevated: '#FFFFFF',
+    elevated: '#F8FAFF',
     input: '#F1F5F9',
     disabled: '#E2E8F0',
     modal: '#FFFFFF',

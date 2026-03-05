@@ -1,17 +1,23 @@
-import { View, ActivityIndicator } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
+import { View } from 'react-native';
 import { Text } from '@/common/components/Text';
+import { UniActivityIndicator } from '@/common/components/uni';
 import { styles } from './Loading.styles';
 import type { LoadingProps } from './Loading.types';
 
+/**
+ * Displays a centered activity indicator with an optional text message.
+ *
+ * @example
+ * ```tsx
+ * <Loading message="Fetching data..." fullScreen />
+ * ```
+ */
 export function Loading({
   message,
   fullScreen = false,
   size = 'large',
   accessibilityLabel,
 }: LoadingProps) {
-  const { theme } = useUnistyles();
-
   styles.useVariants({ fullScreen });
 
   return (
@@ -20,7 +26,10 @@ export function Loading({
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel ?? message ?? 'Loading'}
     >
-      <ActivityIndicator size={size} color={theme.colors.brand.primary} />
+      <UniActivityIndicator
+        size={size}
+        uniProps={(theme) => ({ color: theme.colors.brand.primary })}
+      />
       {message && (
         <Text variant="bodySmall" style={styles.message}>
           {message}

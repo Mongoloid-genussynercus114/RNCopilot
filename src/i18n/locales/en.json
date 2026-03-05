@@ -125,7 +125,8 @@
       "defaultCard": "Filled Card",
       "elevatedCard": "Elevated Card",
       "outlinedCard": "Outlined Card",
-      "tapMe": "Tap me!"
+      "tapMe": "Tap me!",
+      "chipSizes": "Chip Sizes"
     },
     "disclosure": {
       "singleExpand": "Single Expand",
@@ -193,7 +194,8 @@
       "menuEdit": "Edit",
       "menuShare": "Share",
       "menuArchive": "Archive",
-      "menuDelete": "Delete"
+      "menuDelete": "Delete",
+      "openDialogLocked": "Locked Dialog"
     },
     "typography": {
       "textVariants": "Text Variants",

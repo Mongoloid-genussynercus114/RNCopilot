@@ -104,6 +104,48 @@ export const styles = StyleSheet.create((theme) => ({
       },
     ],
   },
+  badgeText: {
+    variants: {
+      variant: {
+        solid: {},
+        outline: {},
+      },
+      colorScheme: {
+        primary: {},
+        success: {},
+        error: {},
+        warning: {},
+        info: {},
+      },
+    },
+    compoundVariants: [
+      {
+        variant: 'outline',
+        colorScheme: 'primary',
+        styles: { color: theme.colors.brand.primary },
+      },
+      {
+        variant: 'outline',
+        colorScheme: 'success',
+        styles: { color: theme.colors.state.success },
+      },
+      {
+        variant: 'outline',
+        colorScheme: 'error',
+        styles: { color: theme.colors.state.error },
+      },
+      {
+        variant: 'outline',
+        colorScheme: 'warning',
+        styles: { color: theme.colors.state.warning },
+      },
+      {
+        variant: 'outline',
+        colorScheme: 'info',
+        styles: { color: theme.colors.state.info },
+      },
+    ],
+  },
   dotWrapper: {
     position: 'relative' as const,
   },

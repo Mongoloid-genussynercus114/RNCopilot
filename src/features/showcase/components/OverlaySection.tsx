@@ -68,6 +68,30 @@ export function OverlaySection({ state }: OverlaySectionProps) {
         ]}
       />
 
+      <View style={styles.row}>
+        <Button
+          title={t('showcase.overlay.openDialogLocked')}
+          variant="outline"
+          size="sm"
+          onPress={() => state.setLockedDialogVisible(true)}
+        />
+      </View>
+      <Dialog
+        visible={state.lockedDialogVisible}
+        onDismiss={() => state.setLockedDialogVisible(false)}
+        dismissOnBackdropPress={false}
+        title={t('showcase.overlay.dialogTitle')}
+        message={t('showcase.overlay.dialogMessage')}
+        size="md"
+        actions={[
+          {
+            label: t('common.confirm'),
+            variant: 'primary',
+            onPress: () => state.setLockedDialogVisible(false),
+          },
+        ]}
+      />
+
       <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.overlay.menu')}
       </Text>

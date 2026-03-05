@@ -52,6 +52,15 @@ export const styles = StyleSheet.create((theme) => ({
         center: { textAlign: 'center' },
         right: { textAlign: 'right' },
       },
+      color: {
+        primary: { color: theme.colors.text.primary },
+        secondary: { color: theme.colors.text.secondary },
+        tertiary: { color: theme.colors.text.tertiary },
+        muted: { color: theme.colors.text.muted },
+        inverse: { color: theme.colors.text.inverse },
+        accent: { color: theme.colors.text.accent },
+        link: { color: theme.colors.text.link },
+      },
     },
   },
 }));

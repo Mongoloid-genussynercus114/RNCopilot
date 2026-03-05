@@ -10,6 +10,14 @@ import Animated, {
 import { styles } from './ProgressBar.styles';
 import type { ProgressBarProps } from './ProgressBar.types';
 
+/**
+ * A horizontal progress bar supporting determinate and indeterminate modes with animated transitions.
+ *
+ * @example
+ * ```tsx
+ * <ProgressBar value={65} colorScheme="success" size="lg" />
+ * ```
+ */
 export function ProgressBar({
   value = 0,
   size = 'md',

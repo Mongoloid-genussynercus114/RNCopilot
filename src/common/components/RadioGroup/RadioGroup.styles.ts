@@ -3,14 +3,16 @@ import { hs } from '@/theme/metrics';
 
 export const styles = StyleSheet.create((theme) => ({
   container: {
-    gap: theme.metrics.spacingV.p8,
+    gap: theme.metrics.spacingV.p4,
     variants: {
       orientation: {
-        vertical: {},
+        vertical: {
+          flexDirection: 'column',
+        },
         horizontal: {
           flexDirection: 'row',
           flexWrap: 'wrap',
-          gap: theme.metrics.spacing.p16,
+          gap: theme.metrics.spacing.p8,
         },
       },
     },
@@ -18,9 +20,10 @@ export const styles = StyleSheet.create((theme) => ({
   option: {
     flexDirection: 'row' as const,
     alignItems: 'center' as const,
-    gap: theme.metrics.spacing.p8,
-    paddingVertical: theme.metrics.spacingV.p4,
+    gap: theme.metrics.spacing.p12,
+    paddingVertical: theme.metrics.spacingV.p12,
   },
+  optionSelected: {},
   optionDisabled: {
     opacity: 0.5,
   },
@@ -28,23 +31,24 @@ export const styles = StyleSheet.create((theme) => ({
     alignItems: 'center' as const,
     justifyContent: 'center' as const,
     borderWidth: 2,
-    borderColor: theme.colors.border.default,
+    borderColor: theme.colors.border.strong,
+    backgroundColor: 'transparent',
     variants: {
       size: {
         sm: {
-          width: hs(18),
-          height: hs(18),
-          borderRadius: hs(9),
+          width: hs(20),
+          height: hs(20),
+          borderRadius: hs(10),
         },
         md: {
-          width: hs(22),
-          height: hs(22),
-          borderRadius: hs(11),
+          width: hs(24),
+          height: hs(24),
+          borderRadius: hs(12),
         },
         lg: {
-          width: hs(26),
-          height: hs(26),
-          borderRadius: hs(13),
+          width: hs(28),
+          height: hs(28),
+          borderRadius: hs(14),
         },
       },
     },
@@ -73,6 +77,9 @@ export const styles = StyleSheet.create((theme) => ({
         },
       },
     },
+  },
+  label: {
+    flex: 1,
   },
 }));
 

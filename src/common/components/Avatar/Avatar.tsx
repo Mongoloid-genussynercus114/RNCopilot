@@ -6,6 +6,15 @@ import { styles } from './Avatar.styles';
 import { AVATAR_SIZES } from './Avatar.types';
 import type { AvatarProps } from './Avatar.types';
 
+/**
+ * Displays a user avatar as an image, initials, custom icon, or default person icon.
+ *
+ * @example
+ * ```tsx
+ * <Avatar source={{ uri: 'https://example.com/photo.jpg' }} size="lg" />
+ * <Avatar initials="JD" size="md" />
+ * ```
+ */
 export function Avatar({ source, initials, icon, size = 'md', accessibilityLabel }: AvatarProps) {
   const dimension = AVATAR_SIZES[size];
   const fontSize = dimension * 0.4;

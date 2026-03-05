@@ -4,6 +4,20 @@ import { Text } from '@/common/components/Text';
 import { styles } from './Dialog.styles';
 import type { DialogProps } from './Dialog.types';
 
+/**
+ * A modal dialog overlay for confirmations, alerts, or custom content.
+ *
+ * @example
+ * ```tsx
+ * <Dialog
+ *   visible={isOpen}
+ *   onDismiss={() => setIsOpen(false)}
+ *   title="Confirm"
+ *   message="Are you sure?"
+ *   actions={[{ label: 'OK', onPress: handleConfirm }]}
+ * />
+ * ```
+ */
 export function Dialog({
   visible,
   onDismiss,
@@ -12,6 +26,7 @@ export function Dialog({
   actions = [],
   children,
   size = 'md',
+  dismissOnBackdropPress = true,
 }: DialogProps) {
   styles.useVariants({ size });
 
@@ -23,7 +38,7 @@ export function Dialog({
       onRequestClose={onDismiss}
       statusBarTranslucent
     >
-      <Pressable style={styles.backdrop} onPress={onDismiss}>
+      <Pressable style={styles.backdrop} onPress={dismissOnBackdropPress ? onDismiss : undefined}>
         <Pressable style={styles.card} onPress={() => {}}>
           {title && (
             <Text variant="h3" style={styles.title}>

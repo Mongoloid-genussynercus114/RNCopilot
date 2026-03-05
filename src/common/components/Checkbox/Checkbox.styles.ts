@@ -56,7 +56,7 @@ export const styles = StyleSheet.create((theme) => ({
     flex: 1,
   },
   indeterminateDash: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.text.inverse,
     borderRadius: 1,
     variants: {
       size: {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -10,6 +10,19 @@ import { Text } from '@/common/components/Text';
 import { styles } from './Snackbar.styles';
 import type { SnackbarProps } from './Snackbar.types';
 
+/**
+ * Animated snackbar notification that auto-dismisses after a configurable duration.
+ *
+ * @example
+ * ```tsx
+ * <Snackbar
+ *   visible={show}
+ *   message="Item saved"
+ *   variant="success"
+ *   onDismiss={() => setShow(false)}
+ * />
+ * ```
+ */
 export function Snackbar({
   visible,
   message,
@@ -19,20 +32,27 @@ export function Snackbar({
   variant = 'neutral',
 }: SnackbarProps) {
   const translateY = useSharedValue(100);
+  const [mounted, setMounted] = useState(false);
 
   styles.useVariants({ variant });
 
   useEffect(() => {
     if (visible) {
+      setMounted(true);
       translateY.value = withTiming(0, { duration: 250 });
       const timer = setTimeout(() => {
         translateY.value = withTiming(100, { duration: 250 }, (finished) => {
-          if (finished) runOnJS(onDismiss)();
+          if (finished) {
+            runOnJS(setMounted)(false);
+            runOnJS(onDismiss)();
+          }
         });
       }, duration);
       return () => clearTimeout(timer);
     }
-    translateY.value = withTiming(100, { duration: 250 });
+    translateY.value = withTiming(100, { duration: 250 }, (finished) => {
+      if (finished) runOnJS(setMounted)(false);
+    });
     return undefined;
   }, [visible, duration, onDismiss, translateY]);
 
@@ -40,7 +60,7 @@ export function Snackbar({
     transform: [{ translateY: translateY.value }],
   }));
 
-  if (!visible) return null;
+  if (!mounted) return null;
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>

@@ -4,11 +4,10 @@ import { hs } from '@/theme/metrics';
 export const styles = StyleSheet.create((theme) => ({
   backdrop: {
     flex: 1,
-    justifyContent: 'center' as const,
-    alignItems: 'center' as const,
     backgroundColor: theme.colors.overlay.modal,
   },
   menu: {
+    position: 'absolute' as const,
     backgroundColor: theme.colors.background.surface,
     borderRadius: theme.metrics.borderRadius.lg,
     paddingVertical: theme.metrics.spacingV.p4,

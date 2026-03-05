@@ -6,6 +6,19 @@ import type { CardProps } from './Card.types';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+/**
+ * Container component with filled, elevated, or outlined variants and optional press support.
+ *
+ * @example
+ * ```tsx
+ * <Card variant="elevated">
+ *   <Text>Card content</Text>
+ * </Card>
+ * <Card pressable onPress={handlePress} variant="outlined">
+ *   <Text>Pressable card</Text>
+ * </Card>
+ * ```
+ */
 export function Card({
   variant = 'filled',
   pressable = false,

@@ -1,6 +1,5 @@
 import { Pressable, View } from 'react-native';
 import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated';
-import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
 import { styles } from './Checkbox.styles';
@@ -12,6 +11,15 @@ const ICON_SIZES: Record<string, number> = {
   lg: 20,
 };
 
+/**
+ * Animated checkbox with checked, unchecked, and indeterminate states.
+ *
+ * @example
+ * ```tsx
+ * <Checkbox checked={isChecked} onChange={setIsChecked} label="Accept terms" />
+ * <Checkbox checked indeterminate size="lg" onChange={handleChange} />
+ * ```
+ */
 export function Checkbox({
   checked,
   onChange,
@@ -20,8 +28,6 @@ export function Checkbox({
   size = 'md',
   label,
 }: CheckboxProps) {
-  const { theme } = useUnistyles();
-
   styles.useVariants({
     size,
     checked: checked && !indeterminate,
@@ -48,13 +54,7 @@ export function Checkbox({
           {indeterminate ? (
             <View style={styles.indeterminateDash} />
           ) : (
-            checked && (
-              <Icon
-                name="checkmark"
-                size={ICON_SIZES[size] ?? theme.metrics.iconSize.xs}
-                color="#FFFFFF"
-              />
-            )
+            checked && <Icon name="checkmark" size={ICON_SIZES[size] ?? 14} variant="inverse" />
           )}
         </Animated.View>
       </View>

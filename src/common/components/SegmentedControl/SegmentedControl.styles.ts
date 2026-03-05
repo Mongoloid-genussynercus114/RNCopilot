@@ -28,8 +28,7 @@ export const styles = StyleSheet.create((theme) => ({
     position: 'absolute' as const,
     top: hs(3),
     bottom: hs(3),
-    left: hs(3),
-    backgroundColor: theme.colors.background.surface,
+    backgroundColor: theme.colors.brand.primary,
     borderRadius: theme.metrics.borderRadius.md,
     elevation: 1,
     shadowColor: theme.colors.shadow.color,
@@ -50,11 +49,22 @@ export const styles = StyleSheet.create((theme) => ({
   segmentIcon: {
     marginRight: theme.metrics.spacing.p4,
   },
-  selectedText: {
-    color: theme.colors.text.primary,
+  segmentTextSelected: {
+    fontWeight: '600' as const,
   },
-  unselectedText: {
-    color: theme.colors.text.secondary,
+  segmentText: {
+    fontWeight: '400' as const,
+    textAlign: 'center' as const,
+    variants: {
+      size: {
+        sm: {
+          fontSize: theme.fonts.size.xs,
+        },
+        md: {
+          fontSize: theme.fonts.size.sm,
+        },
+      },
+    },
   },
 }));
 

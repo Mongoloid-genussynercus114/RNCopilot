@@ -5,7 +5,16 @@ import { env } from '@/config/env';
 
 let supabase: SupabaseClient;
 
-if (env.supabaseUrl && env.supabaseAnonKey) {
+function isValidUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+if (env.supabaseUrl && env.supabaseAnonKey && isValidUrl(env.supabaseUrl)) {
   const supabaseStorage = createMMKV({ id: 'supabase-auth' });
 
   const supabaseStorageAdapter = {

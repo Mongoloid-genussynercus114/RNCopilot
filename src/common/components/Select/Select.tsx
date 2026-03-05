@@ -1,13 +1,29 @@
-import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { BottomSheetFlatList, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useCallback, useMemo, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import type { ListRenderItem } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
 import { styles } from './Select.styles';
 import type { SelectOption, SelectProps } from './Select.types';
 
+/**
+ * A select dropdown using a bottom sheet modal to display options.
+ *
+ * @example
+ * ```tsx
+ * <Select
+ *   value={country}
+ *   onChange={setCountry}
+ *   options={[
+ *     { label: 'Egypt', value: 'eg' },
+ *     { label: 'USA', value: 'us' },
+ *   ]}
+ *   placeholder="Choose a country"
+ *   label="Country"
+ * />
+ * ```
+ */
 export function Select({
   value,
   onChange,
@@ -18,8 +34,7 @@ export function Select({
   disabled = false,
   size = 'md',
 }: SelectProps) {
-  const { theme } = useUnistyles();
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['40%', '60%'], []);
 
   styles.useVariants({ size, error: !!error, disabled, selected: value !== '' });
@@ -29,14 +44,14 @@ export function Select({
 
   const handleOpen = useCallback(() => {
     if (!disabled) {
-      bottomSheetRef.current?.expand();
+      bottomSheetRef.current?.present();
     }
   }, [disabled]);
 
   const handleSelect = useCallback(
     (optionValue: string) => {
       onChange(optionValue);
-      bottomSheetRef.current?.close();
+      bottomSheetRef.current?.dismiss();
     },
     [onChange]
   );
@@ -53,16 +68,10 @@ export function Select({
         <Text variant="body" style={styles.optionText}>
           {item.label}
         </Text>
-        {item.value === value && (
-          <Icon
-            name="checkmark"
-            size={theme.metrics.iconSize.lg}
-            color={theme.colors.brand.primary}
-          />
-        )}
+        {item.value === value && <Icon name="checkmark" sizeVariant="lg" variant="primary" />}
       </Pressable>
     ),
-    [handleSelect, value, theme.colors.brand.primary, theme.metrics.iconSize.lg]
+    [handleSelect, value]
   );
 
   return (
@@ -82,16 +91,15 @@ export function Select({
         <Text variant="body" style={selectedOption ? styles.selectedText : styles.placeholderText}>
           {displayText}
         </Text>
-        <Icon name="chevron-down" size={theme.metrics.iconSize.md} variant="muted" />
+        <Icon name="chevron-down" sizeVariant="md" variant="muted" />
       </Pressable>
       {error && (
         <Text variant="caption" style={styles.errorText}>
           {error}
         </Text>
       )}
-      <BottomSheet
+      <BottomSheetModal
         ref={bottomSheetRef}
-        index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
         backgroundStyle={styles.sheetBackground}
@@ -103,7 +111,7 @@ export function Select({
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}
         />
-      </BottomSheet>
+      </BottomSheetModal>
     </View>
   );
 }

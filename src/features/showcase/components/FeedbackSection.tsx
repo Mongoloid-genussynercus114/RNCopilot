@@ -1,7 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import { Button, EmptyState, Loading, ProgressBar, Skeleton, Text } from '@/common/components';
+import {
+  Button,
+  EmptyState,
+  Icon,
+  Loading,
+  ProgressBar,
+  Skeleton,
+  Text,
+} from '@/common/components';
 import type { ShowcaseState } from '../hooks/useShowcaseState';
 import { SectionHeader } from './SectionHeader';
 
@@ -82,6 +90,7 @@ export function FeedbackSection({ state }: FeedbackSectionProps) {
         message={t('showcase.feedback.nothingHereMessage')}
         actionLabel={t('showcase.feedback.addItems')}
         onAction={() => {}}
+        icon={<Icon name="folder-open-outline" sizeVariant="xl" variant="muted" />}
       />
 
       <Text variant="label" color="secondary" style={styles.subheading}>

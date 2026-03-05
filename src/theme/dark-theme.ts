@@ -23,12 +23,12 @@ export const darkColors: ThemeColors = {
 
   background: {
     app: '#0F172A',
-    surface: 'rgba(255, 255, 255, 0.06)',
-    surfaceAlt: 'rgba(255, 255, 255, 0.10)',
+    surface: '#192236',
+    surfaceAlt: '#262F44',
     section: '#1E293B',
-    elevated: 'rgba(255, 255, 255, 0.12)',
-    input: 'rgba(255, 255, 255, 0.08)',
-    disabled: 'rgba(255, 255, 255, 0.05)',
+    elevated: '#253348',
+    input: '#1F2B3D',
+    disabled: '#172035',
     modal: '#1E293B',
   },
 
@@ -44,11 +44,11 @@ export const darkColors: ThemeColors = {
   },
 
   border: {
-    default: 'rgba(255, 255, 255, 0.12)',
-    subtle: 'rgba(255, 255, 255, 0.06)',
-    strong: 'rgba(255, 255, 255, 0.2)',
+    default: '#2C3548',
+    subtle: '#192236',
+    strong: '#3D4A5E',
     focus: '#818CF8',
-    disabled: 'rgba(255, 255, 255, 0.05)',
+    disabled: '#172035',
   },
 
   icon: {

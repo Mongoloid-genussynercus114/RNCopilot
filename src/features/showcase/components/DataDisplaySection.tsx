@@ -43,6 +43,14 @@ export function DataDisplaySection() {
       </View>
 
       <Text variant="label" color="secondary" style={styles.subheading}>
+        {t('showcase.dataDisplay.chipSizes')}
+      </Text>
+      <View style={styles.row}>
+        <Chip label="Small" variant="solid" size="sm" />
+        <Chip label="Medium" variant="solid" size="md" />
+      </View>
+
+      <Text variant="label" color="secondary" style={styles.subheading}>
         {t('showcase.dataDisplay.cardVariants')}
       </Text>
       <View style={styles.column}>

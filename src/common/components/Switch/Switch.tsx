@@ -1,9 +1,17 @@
-import { Switch as RNSwitch, View } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
+import { View } from 'react-native';
 import { Text } from '@/common/components/Text';
+import { UniSwitch } from '@/common/components/uni';
 import { styles } from './Switch.styles';
 import type { SwitchProps } from './Switch.types';
 
+/**
+ * Toggle switch with optional label, themed track and thumb colors.
+ *
+ * @example
+ * ```tsx
+ * <Switch value={isEnabled} onValueChange={setIsEnabled} label="Notifications" />
+ * ```
+ */
 export function Switch({
   value,
   onValueChange,
@@ -11,8 +19,6 @@ export function Switch({
   size = 'md',
   label,
 }: SwitchProps) {
-  const { theme } = useUnistyles();
-
   styles.useVariants({ size, disabled });
 
   return (
@@ -23,18 +29,20 @@ export function Switch({
         </Text>
       )}
       <View style={styles.switchWrapper}>
-        <RNSwitch
+        <UniSwitch
           value={value}
           onValueChange={onValueChange}
           disabled={disabled}
-          trackColor={{
-            false: theme.colors.background.surfaceAlt,
-            true: theme.colors.brand.primary,
-          }}
-          thumbColor={theme.colors.text.inverse}
           accessibilityRole="switch"
           accessibilityLabel={label}
           accessibilityState={{ checked: value, disabled }}
+          uniProps={(theme) => ({
+            trackColor: {
+              false: theme.colors.border.strong,
+              true: theme.colors.brand.primary,
+            },
+            thumbColor: theme.colors.text.inverse,
+          })}
         />
       </View>
     </View>

@@ -4,6 +4,21 @@ import { Text } from '@/common/components/Text';
 import { styles } from './RadioGroup.styles';
 import type { RadioGroupProps } from './RadioGroup.types';
 
+/**
+ * A group of radio buttons allowing single-selection from a list of options.
+ *
+ * @example
+ * ```tsx
+ * <RadioGroup
+ *   value={selected}
+ *   onChange={setSelected}
+ *   options={[
+ *     { label: 'Option A', value: 'a' },
+ *     { label: 'Option B', value: 'b' },
+ *   ]}
+ * />
+ * ```
+ */
 export function RadioGroup({
   value,
   onChange,
@@ -54,12 +69,18 @@ function RadioItem({
       accessibilityRole="radio"
       accessibilityLabel={label}
       accessibilityState={{ checked: selected, disabled }}
-      style={[styles.option, disabled && styles.optionDisabled]}
+      style={({ pressed }) => [
+        styles.option,
+        disabled && styles.optionDisabled,
+        pressed && { opacity: 0.7 },
+      ]}
     >
       <View style={[styles.radio, selected && styles.radioSelected]}>
         <Animated.View style={[styles.radioDot, dotAnimatedStyle]} />
       </View>
-      <Text variant="body">{label}</Text>
+      <Text variant="body" style={styles.label}>
+        {label}
+      </Text>
     </Pressable>
   );
 }

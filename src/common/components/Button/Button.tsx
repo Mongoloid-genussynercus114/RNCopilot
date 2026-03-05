@@ -1,13 +1,31 @@
-import { ActivityIndicator, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useUnistyles } from 'react-native-unistyles';
 import { Text } from '@/common/components/Text';
+import { UniActivityIndicator } from '@/common/components/uni';
 import { useAnimatedPress } from '@/hooks/useAnimatedPress';
 import { styles } from './Button.styles';
 import type { ButtonProps } from './Button.types';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+function getSpinnerColor(
+  variant: string,
+  theme: { colors: { text: { inverse: string; primary: string }; brand: { primary: string } } }
+) {
+  if (variant === 'primary') return theme.colors.text.inverse;
+  if (variant === 'secondary') return theme.colors.text.primary;
+  return theme.colors.brand.primary;
+}
+
+/**
+ * Pressable button with multiple variants, sizes, loading state, and optional icons.
+ *
+ * @example
+ * ```tsx
+ * <Button title="Submit" variant="primary" onPress={handleSubmit} />
+ * <Button title="Loading" loading />
+ * ```
+ */
 export function Button({
   title,
   variant = 'primary',
@@ -20,7 +38,6 @@ export function Button({
   style,
   ...rest
 }: ButtonProps) {
-  const { theme } = useUnistyles();
   const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
 
   styles.useVariants({
@@ -29,13 +46,6 @@ export function Button({
     fullWidth,
     disabled: disabled || loading,
   });
-
-  const spinnerColorMap = {
-    primary: theme.colors.text.inverse,
-    secondary: theme.colors.text.primary,
-    outline: theme.colors.brand.primary,
-    ghost: theme.colors.brand.primary,
-  };
 
   return (
     <AnimatedPressable
@@ -49,7 +59,11 @@ export function Button({
       {...rest}
     >
       {loading ? (
-        <ActivityIndicator color={spinnerColorMap[variant]} />
+        <UniActivityIndicator
+          uniProps={(theme) => ({
+            color: getSpinnerColor(variant, theme),
+          })}
+        />
       ) : (
         <>
           {leftIcon}

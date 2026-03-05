@@ -8,6 +8,19 @@ import type { ListItemProps } from './ListItem.types';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+/**
+ * A versatile list item supporting optional press interaction, left/right slots, and a divider.
+ *
+ * @example
+ * ```tsx
+ * <ListItem
+ *   title="Settings"
+ *   subtitle="Manage your preferences"
+ *   left={<Icon name="settings" />}
+ *   onPress={() => navigate('settings')}
+ * />
+ * ```
+ */
 export function ListItem({
   title,
   subtitle,

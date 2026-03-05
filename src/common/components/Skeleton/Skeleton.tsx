@@ -8,6 +8,14 @@ import Animated, {
 import { styles } from './Skeleton.styles';
 import type { SkeletonProps } from './Skeleton.types';
 
+/**
+ * Animated placeholder skeleton used to indicate loading content.
+ *
+ * @example
+ * ```tsx
+ * <Skeleton variant="text" width={200} height={16} />
+ * ```
+ */
 export function Skeleton({ variant = 'rect', width, height, animated = true }: SkeletonProps) {
   const opacity = useSharedValue(1);
 

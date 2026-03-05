@@ -21,6 +21,11 @@ export const styles = StyleSheet.create((theme) => ({
           paddingHorizontal: theme.metrics.spacing.p16,
         },
       },
+      focused: {
+        true: {
+          borderColor: theme.colors.border.focus,
+        },
+      },
     },
   },
   input: {

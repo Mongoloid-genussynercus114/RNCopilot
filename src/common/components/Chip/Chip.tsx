@@ -1,6 +1,5 @@
 import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useUnistyles } from 'react-native-unistyles';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
 import { useAnimatedPress } from '@/hooks/useAnimatedPress';
@@ -9,6 +8,14 @@ import type { ChipProps } from './Chip.types';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+/**
+ * A compact element used for selections, filters, or tags.
+ *
+ * @example
+ * ```tsx
+ * <Chip label="Featured" variant="solid" selected onPress={() => {}} />
+ * ```
+ */
 export function Chip({
   label,
   variant = 'outline',
@@ -19,7 +26,6 @@ export function Chip({
   icon,
   disabled = false,
 }: ChipProps) {
-  const { theme } = useUnistyles();
   const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
 
   styles.useVariants({ variant, size, selected, disabled });
@@ -46,11 +52,7 @@ export function Chip({
           accessibilityRole="button"
           accessibilityLabel={`Remove ${label}`}
         >
-          <Icon
-            name="close-circle"
-            size={size === 'sm' ? theme.metrics.iconSize.xs : theme.metrics.iconSize.sm}
-            variant="muted"
-          />
+          <Icon name="close-circle" sizeVariant={size === 'sm' ? 'xs' : 'sm'} variant="muted" />
         </Pressable>
       )}
     </AnimatedPressable>

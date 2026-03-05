@@ -15,8 +15,12 @@ export const styles = StyleSheet.create((theme) => ({
         },
       },
       bold: {
-        true: {},
-        false: {},
+        true: {
+          opacity: 1,
+        },
+        false: {
+          opacity: 1,
+        },
       },
       inset: {
         true: {

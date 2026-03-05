@@ -1,13 +1,20 @@
-import { ActivityIndicator, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useUnistyles } from 'react-native-unistyles';
-import { Icon } from '@/common/components/Icon';
+import { UniActivityIndicator, UniIonicons } from '@/common/components/uni';
 import { useAnimatedPress } from '@/hooks/useAnimatedPress';
 import { ICON_SIZES, styles } from './IconButton.styles';
 import type { IconButtonProps } from './IconButton.types';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
+/**
+ * A pressable button that displays a single icon with animated press feedback.
+ *
+ * @example
+ * ```tsx
+ * <IconButton icon="trash-outline" variant="ghost" onPress={handleDelete} accessibilityLabel="Delete item" />
+ * ```
+ */
 export function IconButton({
   icon,
   variant = 'ghost',
@@ -17,19 +24,27 @@ export function IconButton({
   onPress,
   accessibilityLabel,
 }: IconButtonProps) {
-  const { theme } = useUnistyles();
   const { animatedStyle, onPressIn, onPressOut } = useAnimatedPress();
 
   styles.useVariants({ variant, size, disabled: disabled || loading });
 
-  const iconColorMap = {
-    primary: theme.colors.text.inverse,
-    secondary: theme.colors.text.primary,
-    outline: theme.colors.brand.primary,
-    ghost: theme.colors.icon.primary,
-  };
-
   const iconSize = ICON_SIZES[size] ?? ICON_SIZES.md;
+
+  const resolveColor = (theme: {
+    colors: {
+      text: { inverse: string; primary: string };
+      brand: { primary: string };
+      icon: { primary: string };
+    };
+  }) => {
+    const colorMap = {
+      primary: theme.colors.text.inverse,
+      secondary: theme.colors.text.primary,
+      outline: theme.colors.brand.primary,
+      ghost: theme.colors.icon.primary,
+    };
+    return colorMap[variant];
+  };
 
   return (
     <AnimatedPressable
@@ -43,9 +58,14 @@ export function IconButton({
       style={[styles.container, animatedStyle]}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={iconColorMap[variant]} />
+        <UniActivityIndicator size="small" uniProps={(theme) => ({ color: resolveColor(theme) })} />
       ) : (
-        <Icon name={icon} size={iconSize} color={iconColorMap[variant]} />
+        <UniIonicons
+          name={icon}
+          size={iconSize}
+          accessibilityRole="image"
+          uniProps={(theme) => ({ color: resolveColor(theme) })}
+        />
       )}
     </AnimatedPressable>
   );

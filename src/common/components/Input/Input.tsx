@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { View, TextInput, Pressable } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
+import { View, Pressable } from 'react-native';
 import { Icon } from '@/common/components/Icon';
 import { Text } from '@/common/components/Text';
+import { UniTextInput } from '@/common/components/uni';
 import { styles } from './Input.styles';
 import type { InputProps } from './Input.types';
 
+/**
+ * A themed text input with optional label, icons, error/helper text, and password visibility toggle.
+ *
+ * @example
+ * ```tsx
+ * <Input label="Email" placeholder="you@example.com" error={errors.email} />
+ * ```
+ */
 export function Input({
   label,
   error,
@@ -20,7 +28,6 @@ export function Input({
 }: InputProps) {
   const [focused, setFocused] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { theme } = useUnistyles();
 
   const isPassword = secureTextEntry !== undefined;
   const shouldObscure = isPassword && !passwordVisible;
@@ -52,9 +59,8 @@ export function Input({
       )}
       <View style={styles.inputContainer}>
         {leftIcon}
-        <TextInput
+        <UniTextInput
           style={[styles.input, style]}
-          placeholderTextColor={theme.colors.text.muted}
           editable={!disabled}
           secureTextEntry={shouldObscure}
           accessibilityLabel={label}
@@ -67,6 +73,7 @@ export function Input({
             setFocused(false);
             rest.onBlur?.(e);
           }}
+          uniProps={(theme) => ({ placeholderTextColor: theme.colors.text.muted })}
           {...rest}
         />
         {passwordToggle ?? rightIcon}

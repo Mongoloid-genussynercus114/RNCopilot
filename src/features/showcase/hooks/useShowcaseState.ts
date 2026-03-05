@@ -4,6 +4,7 @@ import type { ComponentSize, SnackbarVariant } from '@/common/components';
 export function useShowcaseState() {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogSize, setDialogSize] = useState<ComponentSize>('md');
+  const [lockedDialogVisible, setLockedDialogVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarVariant, setSnackbarVariant] = useState<SnackbarVariant>('neutral');
@@ -33,6 +34,8 @@ export function useShowcaseState() {
     setDialogVisible,
     dialogSize,
     setDialogSize,
+    lockedDialogVisible,
+    setLockedDialogVisible,
     menuVisible,
     setMenuVisible,
     snackbarVisible,

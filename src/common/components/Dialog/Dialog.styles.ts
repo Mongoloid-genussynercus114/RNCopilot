@@ -1,5 +1,4 @@
 import { StyleSheet, type UnistylesVariants } from 'react-native-unistyles';
-import { hs } from '@/theme/metrics';
 
 export const styles = StyleSheet.create((theme) => ({
   backdrop: {
@@ -7,24 +6,26 @@ export const styles = StyleSheet.create((theme) => ({
     justifyContent: 'center' as const,
     alignItems: 'center' as const,
     backgroundColor: theme.colors.overlay.modal,
-    padding: theme.metrics.spacing.p32,
+    padding: theme.metrics.spacing.p16,
   },
   card: {
-    width: '100%',
-    backgroundColor: theme.colors.background.surface,
+    backgroundColor: theme.colors.background.modal,
     borderRadius: theme.metrics.borderRadius.xl,
     padding: theme.metrics.spacing.p24,
     gap: theme.metrics.spacingV.p12,
     variants: {
       size: {
         sm: {
-          maxWidth: hs(320),
+          width: '75%',
+          padding: theme.metrics.spacing.p16,
         },
         md: {
-          maxWidth: hs(400),
+          width: '85%',
+          padding: theme.metrics.spacing.p24,
         },
         lg: {
-          maxWidth: hs(520),
+          width: '95%',
+          padding: theme.metrics.spacing.p32,
         },
       },
     },
