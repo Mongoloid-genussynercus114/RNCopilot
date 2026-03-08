@@ -380,6 +380,4 @@ feat | fix | docs | style | refactor | perf | test | build | ci | chore | revert
 
 When adapting this template for a specific app (e-commerce, games, social, etc.):
 
-1. Run `npm run reset-template` for a full reset (removes showcase + auth examples)
-2. Follow `docs/MIGRATION.md` for the complete step-by-step guide
-3. Use `npm run reset-showcase` to only remove the component showcase
+1. Follow `docs/MIGRATION.md` for the complete step-by-step guide

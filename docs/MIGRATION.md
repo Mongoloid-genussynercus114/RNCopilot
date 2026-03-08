@@ -28,27 +28,9 @@
 
 Complete every item before making any code changes.
 
-### 1.1 Choose Your Reset Strategy
+### 1.1 Verify Clean State
 
-There are two reset scripts. Pick exactly one based on whether the target app needs authentication.
-
-**Option A — Full reset (recommended for most apps):**
-Removes ALL example content including the showcase home screen. Leaves the auth infrastructure (store, service, forms) in place but clears the home and settings screens.
-
-```bash
-npm run reset-template
-```
-
-**Option B — Showcase reset (use when you want to keep the component gallery for reference):**
-Only resets the home screen back to a blank starting point. Keeps the full showcase intact.
-
-```bash
-npm run reset-showcase
-```
-
-### 1.2 Verify Clean State
-
-After running the reset script, confirm the project compiles with zero errors:
+Confirm the project compiles with zero errors:
 
 ```bash
 npm run validate
@@ -56,7 +38,7 @@ npm run validate
 
 `validate` runs three checks in sequence: `type-check`, `lint`, and `format:check`. All three must pass before proceeding. If any fail, fix the reported issues first.
 
-### 1.3 Confirm Dev Server Starts
+### 1.2 Confirm Dev Server Starts
 
 ```bash
 npm start
@@ -72,7 +54,7 @@ Replace every placeholder value that identifies the template. The template ships
 
 ### 2.1 `app.json`
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app.json`
+**File:** `app.json`
 
 This is the Expo configuration manifest. Every value shown below must be replaced.
 
@@ -83,7 +65,7 @@ This is the Expo configuration manifest. Every value shown below must be replace
   "expo": {
     "name": "My App",
     "slug": "my-app",
-    "scheme": "game-hub",
+    "scheme": "my-app",
     "ios": {
       "bundleIdentifier": "com.myapp.app"
     },
@@ -151,7 +133,7 @@ Field-by-field rules:
 
 ### 2.2 `package.json`
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/package.json`
+**File:** `package.json`
 
 Change only the `name` field. Leave all dependencies untouched.
 
@@ -159,7 +141,7 @@ Change only the `name` field. Leave all dependencies untouched.
 
 ```json
 {
-  "name": "game-hub"
+  "name": "rncopilot"
 }
 ```
 
@@ -175,7 +157,7 @@ The `name` field must be lowercase and URL-safe. It is used internally by npm an
 
 ### 2.3 Replace Assets
 
-All image assets live in `/Users/fouadmagdy/projects/personal/game-hub/assets/images/`. Replace every file in place, keeping the exact same filenames so `app.json` references remain valid.
+All image assets live in `assets/images/`. Replace every file in place, keeping the exact same filenames so `app.json` references remain valid.
 
 - [ ] Replace `icon.png` — 1024x1024 px, PNG with transparency
 - [ ] Replace `splash-icon.png` — your logo centered, PNG with transparency
@@ -192,7 +174,7 @@ The theme system uses react-native-unistyles 3.x with semantic color tokens. All
 
 ### 3.1 Light Theme Colors
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/theme/light-theme.ts`
+**File:** `src/theme/light-theme.ts`
 
 This file exports `lightColors` which is the single source of truth for all light-mode colors.
 
@@ -321,7 +303,7 @@ export const lightColors: ThemeColors = {
 
 ### 3.2 Dark Theme Colors
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/theme/dark-theme.ts`
+**File:** `src/theme/dark-theme.ts`
 
 The dark theme uses lighter, more saturated variants of brand colors so they remain visible against dark backgrounds.
 
@@ -418,7 +400,7 @@ export const darkColors: ThemeColors = {
 
 ### 3.3 Theme Config (Adding Named Presets)
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/theme/config.ts`
+**File:** `src/theme/config.ts`
 
 The template ships with one preset named `'default'`. If your app supports multiple brand themes (e.g., a white-label product), add presets here.
 
@@ -476,11 +458,11 @@ For most apps, leave this file unchanged.
 
 ### 3.4 Custom Fonts
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/theme/fonts.ts`
+**File:** `src/theme/fonts.ts`
 
 The template uses the system font. To use a custom font:
 
-- [ ] Step 1: Add font files to `/Users/fouadmagdy/projects/personal/game-hub/assets/fonts/`
+- [ ] Step 1: Add font files to `assets/fonts/`
 - [ ] Step 2: Register fonts in `app.json`:
 
 ```json
@@ -538,7 +520,7 @@ The i18n system uses react-i18next with JSON translation files. The template shi
 
 ### 4.1 Update English Translations
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/i18n/locales/en.json`
+**File:** `src/i18n/locales/en.json`
 
 Remove showcase-specific keys and add your app-specific keys. Keep all keys that map to shared UI (`common`, `auth`, `settings`, `errorBoundary`, `network`, `notFound`, `errors`, `validation`).
 
@@ -605,14 +587,14 @@ Remove showcase-specific keys and add your app-specific keys. Keep all keys that
 
 ### 4.2 Update Arabic Translations
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/i18n/locales/ar.json`
+**File:** `src/i18n/locales/ar.json`
 
 Mirror the exact same key structure as `en.json`. Every key present in `en.json` must exist in `ar.json` or the TypeScript type system will error (the `en.json` type is used as the reference via `CustomTypeOptions`).
 
 ### 4.3 Add a New Language (e.g., French)
 
 - [ ] Step 1: Create the translation file:
-      `/Users/fouadmagdy/projects/personal/game-hub/src/i18n/locales/fr.json`
+      `src/i18n/locales/fr.json`
       Copy `en.json` as a starting point and translate all values.
 
 - [ ] Step 2: Update `src/i18n/config.ts`:
@@ -687,7 +669,7 @@ if (deviceLocale === 'ar') {
 
 If your app does not need Arabic or RTL:
 
-- [ ] Step 1: Delete `/Users/fouadmagdy/projects/personal/game-hub/src/i18n/locales/ar.json`
+- [ ] Step 1: Delete `src/i18n/locales/ar.json`
 
 - [ ] Step 2: Remove the Arabic resource from `src/i18n/config.ts`:
 
@@ -732,7 +714,7 @@ cp .env.example .env
 
 - [ ] Step 2: Fill in your Supabase project credentials in `.env`:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/.env`
+**File:** `.env`
 
 ```bash
 EXPO_PUBLIC_SUPABASE_URL=https://abcdefghijklmn.supabase.co
@@ -748,7 +730,7 @@ The Supabase client at `src/integrations/supabase.ts` reads these values through
 
 ### 5.2 Add New Environment Variables
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/config/env.ts`
+**File:** `src/config/env.ts`
 
 When your app needs additional configuration values (Stripe keys, analytics IDs, feature flags), add them here:
 
@@ -779,7 +761,7 @@ Then add the corresponding keys to `.env` and `.env.example`.
 
 ### 5.3 Configure the Axios API Client
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/services/api/client.ts`
+**File:** `src/services/api/client.ts`
 
 The API client ships with:
 
@@ -863,7 +845,7 @@ export async function getSession() {
 
 ### 6.1 Modify Auth State Shape
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/providers/auth/authStore.ts`
+**File:** `src/providers/auth/authStore.ts`
 
 The template's `AuthState` uses Supabase's `User` and `Session` types. To extend with app-specific user data:
 
@@ -907,7 +889,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
 ### 6.2 Customize Auth Forms
 
-**Directory:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/auth/`
+**Directory:** `src/features/auth/`
 
 Structure:
 
@@ -1094,7 +1076,7 @@ app/
 
 - [ ] Step 1: Create the screen file:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(main)/(tabs)/products.tsx`
+**File:** `app/(main)/(tabs)/products.tsx`
 
 ```typescript
 import { useTranslation } from 'react-i18next';
@@ -1114,7 +1096,7 @@ export default function ProductsScreen() {
 
 - [ ] Step 2: Register the tab in the layout:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(main)/(tabs)/_layout.tsx`
+**File:** `app/(main)/(tabs)/_layout.tsx`
 
 ```typescript
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -1180,7 +1162,7 @@ To add a product detail screen reachable from the Products tab:
 
 - [ ] Step 1: Create a folder for the tab group if needed, or add the screen file:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(main)/(tabs)/products/[id].tsx`
+**File:** `app/(main)/(tabs)/products/[id].tsx`
 
 ```typescript
 import { useLocalSearchParams } from 'expo-router';
@@ -1215,7 +1197,7 @@ Auth screens should live outside the `(main)` group so they are accessible befor
 
 - [ ] Step 1: Create the auth group:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(auth)/_layout.tsx`
+**File:** `app/(auth)/_layout.tsx`
 
 ```typescript
 import { Stack } from 'expo-router';
@@ -1231,7 +1213,7 @@ export default function AuthLayout() {
 }
 ```
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(auth)/login.tsx`
+**File:** `app/(auth)/login.tsx`
 
 ```typescript
 import { useRouter } from 'expo-router';
@@ -1250,7 +1232,7 @@ export default function LoginScreen() {
 
 - [ ] Step 2: Register the auth group in the root layout:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/_layout.tsx`
+**File:** `app/_layout.tsx`
 
 ```typescript
 function RootNavigator() {
@@ -1296,7 +1278,7 @@ function RootNavigator() {
 
 Deep linking is pre-configured via the `scheme` field in `app.json`. To handle specific paths:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app.json`
+**File:** `app.json`
 
 ```json
 "expo": {
@@ -1322,7 +1304,7 @@ This section shows the complete implementation of a "Products" feature as a refe
 
 ### 8.1 Create the Type Definitions
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/types/product.types.ts`
+**File:** `src/features/products/types/product.types.ts`
 
 ```typescript
 export interface Product {
@@ -1366,7 +1348,7 @@ export interface ProductListResponse {
 
 Create the index file:
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/types/index.ts`
+**File:** `src/features/products/types/index.ts`
 
 ```typescript
 export type {
@@ -1379,7 +1361,7 @@ export type {
 
 ### 8.2 Create the Service
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/services/productService.ts`
+**File:** `src/features/products/services/productService.ts`
 
 ```typescript
 import { api } from '@/services/api/client';
@@ -1405,7 +1387,7 @@ export async function searchProducts(query: string): Promise<Product[]> {
 
 ### 8.3 Create the React Query Hooks
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/hooks/useProducts.ts`
+**File:** `src/features/products/hooks/useProducts.ts`
 
 ```typescript
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
@@ -1456,7 +1438,7 @@ export function useInfiniteProducts(params: Omit<ProductListParams, 'page'> = {}
 
 ### 8.4 Create the ProductCard Component
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/components/ProductCard/ProductCard.types.ts`
+**File:** `src/features/products/components/ProductCard/ProductCard.types.ts`
 
 ```typescript
 import type { Product } from '../../types';
@@ -1468,7 +1450,7 @@ export interface ProductCardProps {
 }
 ```
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/components/ProductCard/ProductCard.styles.ts`
+**File:** `src/features/products/components/ProductCard/ProductCard.styles.ts`
 
 ```typescript
 import { StyleSheet } from 'react-native-unistyles';
@@ -1505,7 +1487,7 @@ export const styles = StyleSheet.create((theme) => ({
 }));
 ```
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/components/ProductCard/ProductCard.tsx`
+**File:** `src/features/products/components/ProductCard/ProductCard.tsx`
 
 ```typescript
 import { Image } from 'expo-image';
@@ -1559,14 +1541,14 @@ export function ProductCard({ product, onPress, onAddToCart }: ProductCardProps)
 }
 ```
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/components/ProductCard/index.ts`
+**File:** `src/features/products/components/ProductCard/index.ts`
 
 ```typescript
 export { ProductCard } from './ProductCard';
 export type { ProductCardProps } from './ProductCard.types';
 ```
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/components/index.ts`
+**File:** `src/features/products/components/index.ts`
 
 ```typescript
 export { ProductCard } from './ProductCard';
@@ -1574,7 +1556,7 @@ export { ProductCard } from './ProductCard';
 
 ### 8.5 Create the Zod Schema
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/products/schemas/productSchema.ts`
+**File:** `src/features/products/schemas/productSchema.ts`
 
 ```typescript
 import { z } from 'zod/v4';
@@ -1593,7 +1575,7 @@ export type ProductFilterFormData = z.infer<typeof productFilterSchema>;
 
 ### 8.6 Create the Screen
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/app/(main)/(tabs)/products.tsx`
+**File:** `app/(main)/(tabs)/products.tsx`
 
 ```typescript
 import { FlashList } from '@shopify/flash-list';
@@ -1675,7 +1657,7 @@ const styles = StyleSheet.create((theme) => ({
 
 ### 8.7 Add i18n Keys for the Feature
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/i18n/locales/en.json` (add this section):
+**File:** `src/i18n/locales/en.json` (add this section):
 
 ```json
 "products": {
@@ -1737,7 +1719,7 @@ Never put server data in Zustand. Never put ephemeral UI state in React Query.
 
 **Example: A cart store**
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/src/features/cart/stores/cartStore.ts`
+**File:** `src/features/cart/stores/cartStore.ts`
 
 ```typescript
 import { create } from 'zustand';
@@ -1919,7 +1901,7 @@ const items = data?.pages.flatMap((page) => page.data) ?? [];
 
 ### 10.1 EAS Build Setup
 
-**File:** `/Users/fouadmagdy/projects/personal/game-hub/eas.json`
+**File:** `eas.json`
 
 The template ships with three profiles. Update the submit configuration with your real credentials:
 

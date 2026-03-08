@@ -247,21 +247,19 @@ Each file contains:
 
 ## Scripts
 
-| Command                  | Description                             |
-| ------------------------ | --------------------------------------- |
-| `npm start`              | Start Expo dev server                   |
-| `npm run ios`            | Run on iOS simulator                    |
-| `npm run android`        | Run on Android emulator                 |
-| `npm run type-check`     | TypeScript checking                     |
-| `npm run lint`           | ESLint                                  |
-| `npm run lint:fix`       | Auto-fix lint errors                    |
-| `npm run format`         | Prettier format                         |
-| `npm run validate`       | All checks (type-check + lint + format) |
-| `npm test`               | Run tests                               |
-| `npm run test:coverage`  | Coverage report                         |
-| `npm run migrate`        | Interactive migration wizard            |
-| `npm run reset-showcase` | Reset home screen showcase only         |
-| `npm run reset-template` | Full reset — blank canvas               |
+| Command                 | Description                             |
+| ----------------------- | --------------------------------------- |
+| `npm start`             | Start Expo dev server                   |
+| `npm run ios`           | Run on iOS simulator                    |
+| `npm run android`       | Run on Android emulator                 |
+| `npm run type-check`    | TypeScript checking                     |
+| `npm run lint`          | ESLint                                  |
+| `npm run lint:fix`      | Auto-fix lint errors                    |
+| `npm run format`        | Prettier format                         |
+| `npm run validate`      | All checks (type-check + lint + format) |
+| `npm test`              | Run tests                               |
+| `npm run test:coverage` | Coverage report                         |
+| `npm run migrate`       | Interactive migration wizard            |
 
 ---
 
@@ -287,14 +285,6 @@ The wizard walks you through:
 8. Configuring EAS builds
 
 ### Manual Customization
-
-```bash
-# Reset to a blank canvas (removes showcase + auth examples)
-npm run reset-template
-
-# Or keep auth and just remove the component showcase
-npm run reset-showcase
-```
 
 1. Update `app.json` — app name, slug, bundle ID
 2. Update `package.json` — project name

@@ -484,5 +484,4 @@ Font Size:     theme.fonts.size.xxs/xs/sm/md/lg/xl/2xl/3xl/4xl/5xl/6xl
 
 When adapting this template for a specific app:
 
-1. Run `npm run reset-template` for a full reset (removes showcase + auth examples), or `npm run reset-showcase` to only remove the component showcase
-2. Follow `docs/MIGRATION.md` for the complete step-by-step migration guide covering app identity, theme, i18n, backend, auth, navigation, and deployment
+1. Follow `docs/MIGRATION.md` for the complete step-by-step migration guide covering app identity, theme, i18n, backend, auth, navigation, and deployment

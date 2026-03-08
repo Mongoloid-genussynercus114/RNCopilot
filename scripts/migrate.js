@@ -206,42 +206,8 @@ const COLOR_PRESETS = {
 // Migration Steps
 // ─────────────────────────────────────────────
 
-async function stepReset(rl) {
-  sectionHeader(1, 'Clean Up Example Content');
-
-  const resetChoice = await askChoice(rl, 'What should we remove?', [
-    {
-      label: 'Full reset — remove auth examples',
-      value: 'full',
-      hint: 'recommended for most apps',
-    },
-    { label: 'Skip — keep everything as-is', value: 'skip' },
-  ]);
-
-  if (resetChoice === 'skip') {
-    skip('No cleanup performed');
-    return;
-  }
-
-  const scriptPath = path.join(ROOT, 'scripts', 'reset-template.js');
-
-  if (!fileExists(scriptPath)) {
-    error('Script not found: scripts/reset-template.js');
-    return;
-  }
-
-  info('Running reset-template.js...');
-  const { execSync } = require('child_process');
-  try {
-    execSync(`node "${scriptPath}"`, { stdio: 'inherit', cwd: ROOT });
-    success('Cleanup complete');
-  } catch (err) {
-    error(`Reset script failed: ${err.message}`);
-  }
-}
-
 async function stepAppIdentity(rl) {
-  sectionHeader(2, 'App Identity');
+  sectionHeader(1, 'App Identity');
 
   const appName = await ask(rl, 'App name (displayed to users)', '');
   if (!appName) {
@@ -318,7 +284,7 @@ async function stepAppIdentity(rl) {
 }
 
 async function stepTheme(rl) {
-  sectionHeader(3, 'Theme & Colors');
+  sectionHeader(2, 'Theme & Colors');
 
   const presetKeys = Object.keys(COLOR_PRESETS);
   const presetChoice = await askChoice(
@@ -370,7 +336,7 @@ async function stepTheme(rl) {
 }
 
 async function stepLanguages(rl) {
-  sectionHeader(4, 'Languages & i18n');
+  sectionHeader(3, 'Languages & i18n');
 
   const keepArabic = await askYesNo(rl, 'Keep Arabic (AR) translations and RTL support?', true);
 
@@ -440,7 +406,7 @@ async function stepLanguages(rl) {
 }
 
 async function stepBackend(rl) {
-  sectionHeader(5, 'Backend Configuration');
+  sectionHeader(4, 'Backend Configuration');
 
   const hasSupabase = await askYesNo(rl, 'Will you use Supabase as your backend?', false);
 
@@ -494,7 +460,7 @@ async function stepBackend(rl) {
 }
 
 async function stepNavigation(rl) {
-  sectionHeader(6, 'Navigation Tabs');
+  sectionHeader(5, 'Navigation Tabs');
 
   info('Current tabs: Home, Settings');
   const addTabs = await askYesNo(rl, 'Add more tabs?', false);
@@ -581,7 +547,7 @@ const styles = StyleSheet.create((theme) => ({
 }
 
 async function stepFeatureScaffold(rl) {
-  sectionHeader(7, 'Scaffold First Feature');
+  sectionHeader(6, 'Scaffold First Feature');
 
   const featureName = await ask(rl, 'Feature name (e.g. products, chat, games)', '');
 
@@ -678,7 +644,7 @@ async function stepFeatureScaffold(rl) {
 }
 
 async function stepEAS(rl) {
-  sectionHeader(8, 'EAS Build Configuration');
+  sectionHeader(7, 'EAS Build Configuration');
 
   const configureEAS = await askYesNo(
     rl,
@@ -788,7 +754,6 @@ async function main() {
       return;
     }
 
-    await stepReset(rl);
     await stepAppIdentity(rl);
     await stepTheme(rl);
     await stepLanguages(rl);

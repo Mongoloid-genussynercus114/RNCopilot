@@ -149,12 +149,6 @@ Gracefully handles missing env vars - app boots and works without Supabase confi
 
 See `docs/COMPONENTS.md` for full API reference with props tables and usage examples.
 
-## Reset & Migration Scripts
-
-- `npm run migrate` - Interactive migration wizard (walks users through all customization steps)
-- `npm run reset-showcase` - Reset home screen showcase only (keeps auth feature)
-- `npm run reset-template` - Full reset, removes ALL example content (showcase + auth), gives a blank canvas
-
 ## Migration
 
 When adapting this template for a specific app (e-commerce, social, games, etc.):

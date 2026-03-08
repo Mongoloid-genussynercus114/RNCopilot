@@ -66,7 +66,7 @@ npm run validate           # Must pass with zero errors/warnings
 ## Repository Structure
 
 ```
-game-hub/
+rncopilot/
 ├── app/                        # Expo Router screens and layouts
 │   ├── _layout.tsx             # Root layout (GestureHandler > ErrorBoundary > QueryProvider > BottomSheetModal > AppContent)
 │   ├── +not-found.tsx          # 404 screen
@@ -625,9 +625,8 @@ const styles = StyleSheet.create((theme) => ({
 
 This is a reusable template. When adapting it for a specific app (e-commerce, games, social, SaaS, etc.):
 
-1. Run `npm run reset-template` for a full reset (removes showcase + auth examples), or `npm run reset-showcase` to only remove the component showcase
-2. Follow the step-by-step guide in `docs/MIGRATION.md` — it covers app identity, theme, i18n, backend, auth, navigation, feature development, and deployment
-3. Start building features in `src/features/`
+1. Follow the step-by-step guide in `docs/MIGRATION.md` — it covers app identity, theme, i18n, backend, auth, navigation, feature development, and deployment
+2. Start building features in `src/features/`
 
 ---
 

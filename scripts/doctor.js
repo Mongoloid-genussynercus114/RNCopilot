@@ -101,8 +101,8 @@ function run() {
   // 4. package.json name
   try {
     const pkg = readJSON('package.json');
-    if (pkg.name === 'game-hub') {
-      warn('package.json still using template name "game-hub"');
+    if (pkg.name === 'rncopilot') {
+      warn('package.json still using template name "rncopilot"');
     } else {
       pass(`package.json name: "${pkg.name}"`);
     }

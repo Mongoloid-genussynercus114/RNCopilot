@@ -216,4 +216,4 @@ export default function HomeScreen() {} // CORRECT
 
 ## Template Migration
 
-Run `npm run reset-template` for a clean slate, then follow `docs/MIGRATION.md` for the step-by-step migration guide.
+Follow `docs/MIGRATION.md` for the step-by-step migration guide.

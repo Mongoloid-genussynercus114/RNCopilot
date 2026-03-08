@@ -204,4 +204,4 @@ Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 
 ## Template Migration
 
-Run `npm run reset-template` for a clean slate, then follow `docs/MIGRATION.md`.
+Follow `docs/MIGRATION.md` for the step-by-step migration guide.

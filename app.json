@@ -4,7 +4,7 @@
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "game-hub",
+    "scheme": "my-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "supportsRTL": true,

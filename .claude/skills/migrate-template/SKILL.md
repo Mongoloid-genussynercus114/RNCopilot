@@ -19,12 +19,6 @@ Walk through each section interactively, confirming with the user before making 
 Ask the user:
 
 - **What app are you building?** (e.g., e-commerce, social, fitness, notes)
-- **Does it need authentication?** (determines reset strategy)
-
-Then run the appropriate reset script:
-
-- With auth: `npm run reset-showcase` (keeps auth infrastructure)
-- Without auth: `npm run reset-template` (full blank canvas)
 
 ### 2. App Identity
 
@@ -92,7 +86,7 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 ### 6. Authentication Customization
 
-If auth was kept (reset-showcase), ask:
+If the app needs authentication, ask:
 
 - **Auth methods needed?** (email/password, OAuth, magic link)
 - **Custom fields on signup?** (username, phone, etc.)

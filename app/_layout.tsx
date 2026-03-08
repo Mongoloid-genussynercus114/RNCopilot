@@ -11,10 +11,8 @@ import { ErrorBoundary } from '@/common/components/ErrorBoundary';
 import i18n from '@/i18n/config';
 import { QueryProvider } from '@/providers';
 import { useAuthStore } from '@/providers/auth/authStore';
-import { initializeTheme } from '@/theme/themeManager';
 
 SplashScreen.preventAutoHideAsync();
-initializeTheme();
 
 const isArabic = i18n.language === 'ar';
 if (Platform.OS !== 'web') {
