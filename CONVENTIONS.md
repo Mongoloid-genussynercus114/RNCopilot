@@ -752,3 +752,46 @@ The project runs `validate` (type-check + lint + format) via Husky. All checks m
 ```bash
 npm run validate   # Run manually before committing
 ```
+
+---
+
+## Forbidden Patterns
+
+These patterns are banned from new code. Automated hooks block them for Claude Code; all contributors and agents must avoid them.
+
+### Suppression Comments
+
+| Forbidden Pattern                            | Alternative                                                           |
+| -------------------------------------------- | --------------------------------------------------------------------- |
+| `// eslint-disable-next-line`                | Fix the lint violation in the code                                    |
+| `/* eslint-disable */`                       | Fix all violations in the file, or restructure                        |
+| `// @ts-ignore`                              | Use proper types, narrowing, or `@ts-expect-error` with a description |
+| `// @ts-nocheck`                             | Type-check every file. Fix the errors.                                |
+| `// @ts-expect-error` (bare, no description) | Add a description: `// @ts-expect-error -- reason`                    |
+
+### Type Safety Bypasses
+
+| Forbidden Pattern | Alternative                                                       |
+| ----------------- | ----------------------------------------------------------------- |
+| `: any`           | Define a proper type or use `unknown` with type guards            |
+| `as any`          | Use a specific type assertion (`as SpecificType`) or narrow first |
+| `<any>`           | Use a generic parameter (`<T>`) or a concrete type                |
+
+### Git Bypasses
+
+| Forbidden Pattern        | Alternative                                             |
+| ------------------------ | ------------------------------------------------------- |
+| `git commit --no-verify` | Fix the pre-commit hook errors (run `npm run validate`) |
+| `git push --no-verify`   | Fix the pre-push hook errors                            |
+
+### Existing Exceptions
+
+The following pre-approved usages exist in the codebase and are grandfathered in:
+
+| File                               | Usage                                                                  | Reason                                                |
+| ---------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
+| `jest.setup.ts:1`                  | `/* eslint-disable @typescript-eslint/no-require-imports */`           | Jest setup requires CommonJS `require()` for mocking  |
+| `src/utils/storage/storage.ts:38`  | `// eslint-disable-next-line @typescript-eslint/no-non-null-assertion` | MMKV instance is guaranteed initialized at this point |
+| `src/utils/storage/storage.ts:170` | `// eslint-disable-next-line @typescript-eslint/no-non-null-assertion` | MMKV instance is guaranteed initialized at this point |
+
+No new exceptions should be added without explicit approval from the project maintainer.

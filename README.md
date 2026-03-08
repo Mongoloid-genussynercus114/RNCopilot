@@ -1,8 +1,10 @@
 <div align="center">
 
-# React Native Expo Starter
+# RNCopilot
 
 ### The AI-Friendly, Production-Ready React Native Template
+
+**[Read the Documentation](https://docs.rncopilot.xyz)**
 
 [![React Native](https://img.shields.io/badge/React%20Native-0.83.2-61DAFB?logo=react&logoColor=white)](https://reactnative.dev)
 [![Expo SDK](https://img.shields.io/badge/Expo%20SDK-55-000020?logo=expo&logoColor=white)](https://expo.dev)
@@ -14,7 +16,9 @@
 
 Works with **Claude Code** · **Cursor** · **Windsurf** · **Cline** · **GitHub Copilot** · **OpenAI Codex**
 
-[Quick Start](#-quick-start) · [Features](#-whats-included) · [Components](#-component-library) · [AI Guide](#-ai-powered-development) · [Docs](#-documentation)
+[Quick Start](#-quick-start) · [Features](#-whats-included) · [Components](#-component-library) · [AI Guide](#-ai-powered-development) · [Docs](#-documentation) · [Website](https://docs.rncopilot.xyz)
+
+![RNCopilot showcasing iOS and Android apps in light and dark modes](docs/images/hero.jpg)
 
 </div>
 
@@ -22,10 +26,10 @@ Works with **Claude Code** · **Cursor** · **Windsurf** · **Cline** · **GitHu
 
 ## Why This Template?
 
-Most React Native templates give you a blank screen with routing. This one gives you **everything you need to ship a real app** — authentication, theming, internationalization, 33 production-ready components, API integration, and the most comprehensive AI agent instructions of any React Native template.
+Most React Native templates give you a blank screen with routing. This one gives you **everything you need to ship a real app** — authentication, theming, internationalization, 30 production-ready components, API integration, and the most comprehensive AI agent instructions of any React Native template.
 
 - **Start building features immediately** — auth, state management, forms, and storage are pre-wired
-- **33 shared UI components** — Button, Card, Input, Dialog, and more — all themed, accessible, and ready to use
+- **30 shared UI components** — Button, Card, Input, Dialog, and more — all themed, accessible, and ready to use
 - **AI-first architecture** — instruction files for 6+ AI coding tools so your AI assistant understands the codebase instantly
 - **Clean migration path** — run one command to reset and start customizing for your use case
 
@@ -36,7 +40,7 @@ Most React Native templates give you a blank screen with routing. This one gives
 | Category                 | Details                                                                                |
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | **Authentication**       | Zustand-based auth store, Supabase integration, login/register forms, route protection |
-| **33 UI Components**     | Button, Card, Input, Dialog, Avatar, Badge, Chip, Accordion, and 25 more               |
+| **30 UI Components**     | Button, Card, Input, Dialog, Avatar, Badge, Chip, Accordion, and 25 more               |
 | **Theme System**         | Light/dark mode, semantic tokens, Indigo + Teal palette, responsive scaling            |
 | **Internationalization** | English + Arabic, RTL support, enforced via ESLint                                     |
 | **State Management**     | Zustand (client) + React Query (server) with MMKV persistence                          |
@@ -73,7 +77,7 @@ Most React Native templates give you a blank screen with routing. This one gives
 
 ```bash
 # 1. Clone the template
-git clone https://github.com/your-username/react-native-expo-starter.git my-app
+git clone https://github.com/FouadMagdy01/RNCopilot.git my-app
 cd my-app
 
 # 2. Install dependencies
@@ -100,15 +104,14 @@ Then press `i` for iOS simulator or `a` for Android emulator.
 │   ├── +not-found.tsx            # 404 screen
 │   └── (main)/(tabs)/            # Tab navigation
 │       ├── _layout.tsx           # Tab bar configuration
-│       ├── index.tsx             # Home (component showcase)
+│       ├── index.tsx             # Home tab
 │       └── settings.tsx          # Settings screen
 │
 ├── src/
-│   ├── common/components/        # 33 shared UI components
+│   ├── common/components/        # 30 shared UI components
 │   ├── config/                   # Environment configuration
 │   ├── features/                 # Feature modules
-│   │   ├── auth/                 # Authentication (login, register)
-│   │   └── showcase/             # Component showcase (removable)
+│   │   └── auth/                 # Authentication (hooks, services)
 │   ├── hooks/                    # Global hooks
 │   ├── i18n/                     # Translations (en.json, ar.json)
 │   ├── integrations/             # Supabase client
@@ -142,7 +145,7 @@ Then press `i` for iOS simulator or `a` for Android emulator.
 
 ## Component Library
 
-33 production-ready, themed, accessible components. See the [full API reference](docs/COMPONENTS.md).
+30 production-ready, themed, accessible components. See the [full API reference](docs/COMPONENTS.md) or the [docs website](https://docs.rncopilot.xyz/components).
 
 <details>
 <summary><strong>Action</strong></summary>
@@ -359,10 +362,12 @@ See **[docs/AI-GUIDE.md](docs/AI-GUIDE.md)** for 10+ complete recipes.
 
 ## Documentation
 
+> **Full documentation website:** [**docs.rncopilot.xyz**](https://docs.rncopilot.xyz) — Getting started guides, component API reference, code recipes, conventions, and more.
+
 | Document                                | Description                                |
 | --------------------------------------- | ------------------------------------------ |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture and key patterns       |
-| [COMPONENTS.md](docs/COMPONENTS.md)     | Full API reference for all 33 components   |
+| [COMPONENTS.md](docs/COMPONENTS.md)     | Full API reference for all 30 components   |
 | [AI-GUIDE.md](docs/AI-GUIDE.md)         | Pattern cookbook with copy-paste templates |
 | [MIGRATION.md](docs/MIGRATION.md)       | Step-by-step template customization guide  |
 | [SETUP.md](docs/SETUP.md)               | Environment setup and configuration        |

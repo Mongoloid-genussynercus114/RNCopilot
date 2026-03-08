@@ -424,6 +424,42 @@ Examples:
 
 ---
 
+## Strict Enforcement Rules
+
+The following patterns are **absolutely forbidden** and will be blocked by automated hooks (for Claude Code) or must be rejected in code review:
+
+### Forbidden Patterns
+
+| Pattern                                                               | Why It's Forbidden                               |
+| --------------------------------------------------------------------- | ------------------------------------------------ |
+| `eslint-disable` / `eslint-disable-next-line` / `eslint-disable-line` | Suppresses lint rules instead of fixing the code |
+| `@ts-ignore`                                                          | Silently hides type errors without explanation   |
+| `@ts-nocheck`                                                         | Disables type checking for the entire file       |
+| Bare `@ts-expect-error` (no description)                              | Must explain why the suppression is needed       |
+| `any` type (`: any`, `as any`, `<any>`)                               | Defeats the purpose of TypeScript                |
+| `--no-verify` on git commit/push                                      | Skips pre-commit hooks that catch errors         |
+
+### When You Encounter a Type Error
+
+Do NOT suppress it. Instead:
+
+1. **Type narrowing** — use `typeof`, `instanceof`, `in`, or discriminated unions
+2. **`unknown` + type guards** — cast to `unknown` first, then narrow with runtime checks
+3. **Proper interfaces** — define the correct shape instead of using `any`
+4. **Generics** — use generic type parameters for reusable, type-safe functions
+5. **`@ts-expect-error` with description** — only as a last resort, with a clear explanation
+
+### When You Encounter a Lint Error
+
+Do NOT disable the rule. Instead:
+
+1. **Read the error message** — ESLint messages explain what's wrong and often suggest fixes
+2. **Fix the code** — restructure to satisfy the rule (it exists for a reason)
+3. **Run `npm run lint:fix`** — many issues are auto-fixable
+4. **Ask the user** — if you genuinely can't resolve it, ask rather than suppress
+
+---
+
 ## Complete Code Pattern Examples
 
 ### Full Feature Implementation

@@ -104,6 +104,30 @@ feature/
 - No color literals - use theme tokens
 - Consistent type imports: `import type { Foo } from './types'`
 
+## Claude Code Hooks
+
+Three shell-script hooks in `.claude/hooks/` enforce project rules deterministically:
+
+| Hook                            | Trigger                   | Purpose                                                                                     |
+| ------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------- |
+| `block-suppression-comments.sh` | PreToolUse (Write\|Edit)  | Blocks `eslint-disable`, `@ts-ignore`, `@ts-nocheck`, bare `@ts-expect-error` in code files |
+| `block-no-verify.sh`            | PreToolUse (Bash)         | Blocks `git commit --no-verify` and `git push --no-verify`                                  |
+| `lint-after-edit.sh`            | PostToolUse (Write\|Edit) | Runs `eslint --fix` on edited ts/tsx/js/jsx files (informational)                           |
+
+Hook configuration lives in `.claude/settings.json`.
+
+## Strict Rules (Hook-Enforced)
+
+These rules are enforced by hooks and will block tool calls that violate them:
+
+- **NEVER** add `eslint-disable`, `eslint-disable-next-line`, or `eslint-disable-line` comments
+- **NEVER** use `@ts-ignore` or `@ts-nocheck`
+- **NEVER** use bare `@ts-expect-error` (must include a description if absolutely necessary)
+- **NEVER** use `any` type (`as any`, `: any`, `<any>`)
+- **NEVER** use `--no-verify` with git commit or push
+
+When you encounter a type error, use type narrowing, `unknown` with type guards, proper interfaces, or generics. When you encounter a lint error, fix the code — don't suppress the warning.
+
 ## Auth Pattern
 
 Auth is managed by Zustand store (`useAuthStore`), not a React context provider. `useAuthInit()` hook is called in the root layout to initialize auth and set up Supabase listener.

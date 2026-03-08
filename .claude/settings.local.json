@@ -1,13 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "WebSearch",
-      "WebFetch(domain:agents.md)",
-      "Bash(npx tsc:*)",
-      "Bash(npx eslint:*)",
-      "WebFetch(domain:www.unistyl.es)",
-      "Bash(npm run:*)",
-      "WebFetch(domain:github.com)"
-    ]
+    "allow": []
   }
 }

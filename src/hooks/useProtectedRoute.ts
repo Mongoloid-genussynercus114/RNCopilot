@@ -11,10 +11,11 @@ export function useProtectedRoute() {
   useEffect(() => {
     if (isLoading) return;
 
-    const inAuthGroup = segments[0] === '(auth)';
+    const inAuthGroup = (segments[0] as string) === '(auth)';
 
     if (!session && !inAuthGroup) {
-      router.replace('/(auth)/login');
+      // Route will exist once auth screens are added
+      router.replace('/(auth)/login' as never);
     } else if (session && inAuthGroup) {
       router.replace('/(main)/(tabs)');
     }
